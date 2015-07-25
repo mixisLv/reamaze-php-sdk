@@ -1,0 +1,35 @@
+{
+  "name": "mixislv/reamaze-php-sdk",
+  "type": "library",
+  "description": "A PHP library for the Reamaze Core API",
+  "license": "MIT",
+  "keywords": [
+    "reamaze",
+    "api",
+    "library",
+    "sdk",
+    "php"
+  ],
+  "authors": [
+    {
+      "name": "Mikus Rozenbergs",
+      "homepage": "http://mixis.lv"
+    }
+  ],
+  "require": {
+    "php": ">=5.4.0",
+    "ext-curl": "*",
+    "ext-json": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "mixisLv\\Reamaze\\": "src"
+    }
+  },
+  "extra": {
+    "component": "package",
+    "branch-alias": {
+      "dev-master": "1.0.x-dev"
+    }
+  }
+}
