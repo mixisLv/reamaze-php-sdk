@@ -10,12 +10,12 @@ The following PHP extension is required:
 
 ##Installing
 
-    composer require "mixislv/reamaze-php-sdk" "1.*"
+    composer require "mixislv/reamaze-php-sdk" "1.0.*"
 
 Or by adding the following to your composer.json:
 
     "require": {
-        "mixislv/reamaze-php-sdk": “1.*”
+        "mixislv/reamaze-php-sdk": "1.0.*"
     }
 
 ## Examples
