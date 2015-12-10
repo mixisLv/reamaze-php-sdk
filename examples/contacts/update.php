@@ -3,10 +3,10 @@ use mixisLv\Reamaze\Api;
 use mixisLv\Reamaze\Exceptions\ApiException;
 use mixisLv\Reamaze\Params\Contacts\UpdateParams;
 
-include_once dirname(__FILE__) . './../autoload.php';
+include_once dirname(__FILE__) . './../../autoload.php';
 
-if (is_file(dirname(__FILE__) . './config.php')) {
-    include_once dirname(__FILE__) . './config.php';
+if (is_file(dirname(__FILE__) . './../config.php')) {
+    include_once dirname(__FILE__) . './../config.php';
 }
 
 if (!defined('REAMAZE_BRAND')) {
