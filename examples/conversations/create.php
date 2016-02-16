@@ -9,7 +9,7 @@
 
 use mixisLv\Reamaze\Api;
 use mixisLv\Reamaze\Exceptions\ApiException;
-use mixisLv\Reamaze\Params\Contacts\CreateParams;
+use mixisLv\Reamaze\Params\Conversations\CreateParams;
 
 include_once dirname(__FILE__) . './../../autoload.php';
 
@@ -27,22 +27,36 @@ if (!defined('REAMAZE_TOKEN')) {
     define('REAMAZE_TOKEN', 'your-token');
 }
 
+
 $reamaze        = new Api(REAMAZE_BRAND, REAMAZE_LOGIN, REAMAZE_TOKEN);
 $reamaze->debug = false;
 
-// Example 1
+// Create conversation
 try {
-    $contact  = new CreateParams(
+    $conversation = new CreateParams(
         [
-            'name'  => 'My Test Contact',
-            'email' => 'test@example.com',
-            'data'  => [
+            "subject"  => "new conversation",
+            "category" => "support",
+            "tag_list" => [
+                "API",
+                "test"
+            ],
+            "message"  => [
+                "body"                  => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam rutrum cursus arcu, et viverra nisl finibus molestie.",
+                "recipients"            => ["recipient@example.com"],
+                "suppress_notification" => true
+            ],
+            "user"     => [
+                "name"  => "Lorem Ipsum",
+                "email" => "lorem.ipsum@example.com"
+            ],
+            'data'     => [
                 'custom_attribute' => 'custom data'
             ]
         ]
     );
-    $response = $reamaze->contacts->create($contact);
+    $response     = $reamaze->conversations->create($conversation);
     var_dump($response);
 } catch (ApiException $e) {
-    var_dump($e->getMessage());
+    var_dump($e);
 }

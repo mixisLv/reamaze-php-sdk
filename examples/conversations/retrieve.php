@@ -9,7 +9,7 @@
 
 use mixisLv\Reamaze\Api;
 use mixisLv\Reamaze\Exceptions\ApiException;
-use mixisLv\Reamaze\Params\Contacts\CreateParams;
+use mixisLv\Reamaze\Params\Conversations\RetrieveParams;
 
 include_once dirname(__FILE__) . './../../autoload.php';
 
@@ -27,22 +27,20 @@ if (!defined('REAMAZE_TOKEN')) {
     define('REAMAZE_TOKEN', 'your-token');
 }
 
+
 $reamaze        = new Api(REAMAZE_BRAND, REAMAZE_LOGIN, REAMAZE_TOKEN);
 $reamaze->debug = false;
 
-// Example 1
+// Retrieve conversations
 try {
-    $contact  = new CreateParams(
+    $params = new RetrieveParams(
         [
-            'name'  => 'My Test Contact',
-            'email' => 'test@example.com',
-            'data'  => [
-                'custom_attribute' => 'custom data'
-            ]
+            'filter'=> RetrieveParams::FILTER_ALL,
         ]
     );
-    $response = $reamaze->contacts->create($contact);
+
+    $response = $reamaze->conversations->retrieve($params);
     var_dump($response);
 } catch (ApiException $e) {
-    var_dump($e->getMessage());
+    var_dump($e);
 }

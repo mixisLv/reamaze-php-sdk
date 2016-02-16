@@ -2,7 +2,7 @@
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-    <title>Reamaze php SDK Examples</title>
+    <title>Reamaze PHP SDK Examples</title>
     <script type="text/javascript">
         <!--
         function toggleVisibility(id) {
@@ -33,6 +33,26 @@
         highlight_string($file); ?>
     </div>
 <? } ?>
+
+
+<h2>Conversations</h2>
+
+<?php foreach (['create' => 'Create Conversation', 'retrieve' => 'Retrieve Conversation'] as $key => $title) { ?>
+    <h3>
+        <?= $title ?>
+        <a href="#" onclick="toggleVisibility('conversations-<?= $key ?>');">source</a> |
+        <a href="./conversations/<?= $key ?>.php" target="_blank">demo</a>
+    </h3>
+
+    <div id="conversations-<?= $key ?>" style="display: none;">
+        <?php $file = file_get_contents('./conversations/' . $key . '.php');
+        highlight_string($file); ?>
+    </div>
+<? } ?>
+
+
+
+
 
 </body>
 </html>
