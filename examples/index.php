@@ -32,7 +32,7 @@
         <?php $file = file_get_contents('./contacts/' . $key . '.php');
         highlight_string($file); ?>
     </div>
-<? } ?>
+<?php } ?>
 
 
 <h2>Conversations</h2>
@@ -48,10 +48,23 @@
         <?php $file = file_get_contents('./conversations/' . $key . '.php');
         highlight_string($file); ?>
     </div>
-<? } ?>
+<?php } ?>
 
 
+<h2>Messages</h2>
 
+<?php foreach (['create' => 'Create Message', 'retrieve' => 'Retrieve Message'] as $key => $title) { ?>
+    <h3>
+        <?= $title ?>
+        <a href="#" onclick="toggleVisibility('messages-<?= $key ?>');">source</a> |
+        <a href="./messages/<?= $key ?>.php" target="_blank">demo</a>
+    </h3>
+
+    <div id="messages-<?= $key ?>" style="display: none;">
+        <?php $file = file_get_contents('./messages/' . $key . '.php');
+        highlight_string($file); ?>
+    </div>
+<?php } ?>
 
 
 </body>
