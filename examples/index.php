@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
     <title>Reamaze PHP SDK Examples</title>
@@ -18,6 +18,21 @@
 <body>
 
 <h1>Reamaze php SDK Examples</h1>
+
+<h2>Articles [ @todo ]</h2>
+
+<?php foreach (['retrieve' => 'Retrieving Articles', 'get' => 'Get Article', 'create' => 'Creating Articles', 'update' => 'Updating Articles'] as $key => $title) { ?>
+    <h3>
+        <?= $title ?>
+        <a href="#" onclick="toggleVisibility('articles-<?= $key ?>');">source</a> |
+        <a href="./articles/<?= $key ?>.php" target="_blank">demo</a>
+    </h3>
+
+    <div id="articles-<?= $key ?>" style="display: none;">
+        <?php $file = file_get_contents('./articles/' . $key . '.php');
+        highlight_string($file); ?>
+    </div>
+<?php } ?>
 
 <h2>Contacts</h2>
 
@@ -62,6 +77,22 @@
 
     <div id="messages-<?= $key ?>" style="display: none;">
         <?php $file = file_get_contents('./messages/' . $key . '.php');
+        highlight_string($file); ?>
+    </div>
+<?php } ?>
+
+
+<h2>Channels [ @todo ]</h2>
+
+<?php foreach (['retrieve' => 'Retrieving Channels', 'get' => 'Get Channel'] as $key => $title) { ?>
+    <h3>
+        <?= $title ?>
+        <a href="#" onclick="toggleVisibility('channels-<?= $key ?>');">source</a> |
+        <a href="./channels/<?= $key ?>.php" target="_blank">demo</a>
+    </h3>
+
+    <div id="channels-<?= $key ?>" style="display: none;">
+        <?php $file = file_get_contents('./channels/' . $key . '.php');
         highlight_string($file); ?>
     </div>
 <?php } ?>

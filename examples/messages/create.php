@@ -39,6 +39,7 @@ try {
             "body"                  => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam rutrum cursus arcu, et viverra nisl finibus molestie.",
             "recipients"            => ["recipient@example.com"],
             "suppress_notification" => true,
+            "suppress_autoresolve"  => true,
             "user"                  => [
                 "name"  => "Lorem Ipsum",
                 "email" => "lorem.ipsum@example.com"

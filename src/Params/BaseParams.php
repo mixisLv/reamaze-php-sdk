@@ -41,6 +41,10 @@ abstract class BaseParams
         return max(1, (int)$value);
     }
 
+    public function paramsArray() {
+        return [];
+    }
+
     public function toArray() {
         return get_object_vars($this);
     }

@@ -9,7 +9,7 @@
 
 use mixisLv\Reamaze\Api;
 use mixisLv\Reamaze\Exceptions\ApiException;
-use mixisLv\Reamaze\Params\Contacts\CreateParams;
+use mixisLv\Reamaze\Params\Articles\GetParams;
 
 include_once dirname(__FILE__) . './../../autoload.php';
 
@@ -32,16 +32,7 @@ $reamaze->debug = false;
 
 // Example 1
 try {
-    $contact  = new CreateParams(
-        [
-            'name'  => 'My Test Contact',   
-            'email' => 'test@example.com',
-            'data'  => [
-                'custom_attribute' => 'custom data'
-            ]
-        ]
-    );
-    $response = $reamaze->contacts->create($contact);
+    $response = $reamaze->articles->get(new GetParams(['slug' => 'test']));
     var_dump($response);
 } catch (ApiException $e) {
     var_dump($e->getMessage());
