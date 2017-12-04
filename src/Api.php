@@ -1,4 +1,9 @@
 <?php
+/**
+ * reamaze-sdk-api
+ *
+ * @author Mikus Rozenbergs <mikus.rozenbergs@gmail.com>
+ */
 
 namespace mixisLv\Reamaze;
 
@@ -61,7 +66,7 @@ class Api
         $this->apiToken   = $apiToken;
 
         $this->ch = curl_init();
-        curl_setopt($this->ch, CURLOPT_USERAGENT, 'Reamaze-PHP/1.0 (' . $brand . ')');
+        curl_setopt($this->ch, CURLOPT_USERAGENT, 'mixisLv/reamaze-php-sdk v2.0 (' . $brand . ')');
         curl_setopt($this->ch, CURLOPT_HEADER, false);
         curl_setopt($this->ch, CURLOPT_HTTPHEADER, array('Accept: application/json', 'Content-Type: application/json'));
         curl_setopt($this->ch, CURLOPT_USERPWD, $this->loginEmail . ":" . $this->apiToken);
@@ -116,13 +121,13 @@ class Api
      * @param string $method GET/POST/PUT
      * @param array $params
      *
-     * @return string JSON
+     * @return \stdClass
      * @throws ApiException
      */
     public function call($action, $method, array $params)
     {
         $start  = microtime(true);
-        $url    = 'https://' . $this->brand . '.reamaze.com/api/v1/' . $action;
+        $url    = 'https://' . $this->brand . '.reamaze.io/api/v1/' . $action;
         $isPost = $method == 'POST';
         $isPut  = $method == 'PUT';
 
@@ -165,10 +170,10 @@ class Api
             $response['error'] = curl_error($this->ch);
             $this->error(500, $response);
         }
-        $response = json_decode($responseBody, true);
+        $response = json_decode($responseBody, false);
 
-        if ($response === null || isset($response['error']) || isset($response['errors']) || floor($info['http_code'] / 100) >= 4) {
-            $this->error($info['http_code'], $response);
+        if ($response === null || isset($response->error) || isset($response->errors) || floor($info['http_code'] / 100) >= 4) {
+            $this->error($info['http_code'], $response !==null ? $response : $responseBody);
         }
 
         return $response;
@@ -185,11 +190,14 @@ class Api
     public function error($code, $response)
     {
         $errorMsg = false;
-        if (isset($response, $response['errors'])) {
-            $errorMsg = implode(', ', array_map(function ($v, $k) { return $k . ': ' . implode(',', $v); }, $response['errors'], array_keys($response['errors'])));
+        if (isset($response, $response->errors)) {
+            $errorMsg = implode(', ', array_map(function ($v, $k) { return $k . ': ' . implode(',', $v); }, $response->errors, array_keys($response->errors)));
         }
-        if (isset($response, $response['error'])) {
-            $errorMsg = $response['error'];
+        if (isset($response, $response->error)) {
+            $errorMsg = $response->error;
+        }
+        if(is_string($response)) {
+            $errorMsg = $response;
         }
 
         switch ($code) {
