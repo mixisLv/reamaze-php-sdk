@@ -3,8 +3,6 @@
  * reamaze-php-sdk
  *
  * @author    Mikus Rozenbergs <mikus.rozenbergs@gmail.com>
- * @copyright Copyright (C) 2016 Mikus Rozenbergs
- * @version   $Id$
  */
 
 use mixisLv\Reamaze\Api;
@@ -30,11 +28,13 @@ if (!defined('REAMAZE_TOKEN')) {
 $reamaze        = new Api(REAMAZE_BRAND, REAMAZE_LOGIN, REAMAZE_TOKEN);
 $reamaze->debug = false;
 
-// Example 1
+echo "<h3>Example 1</h3>";
+echo "<pre>";
+
 $params = new CreateParams();
 
 $params->title = 'Article title';
-$params->body = 'Article without slug';
+$params->body  = 'Article without slug';
 
 try {
     $response = $reamaze->articles->create($params);
@@ -43,11 +43,15 @@ try {
     var_dump($e->getMessage());
 }
 
-// Example 2
+echo "</pre>";
+
+echo "<h3>Example 2</h3>";
+echo "<pre>";
+
 $params = new CreateParams(['slug' => 'test']);
 
 $params->title = 'Article title';
-$params->body = 'Article with slug';
+$params->body  = 'Article with slug';
 
 try {
     $response = $reamaze->articles->create($params);
@@ -55,3 +59,4 @@ try {
 } catch (ApiException $e) {
     var_dump($e->getMessage());
 }
+echo "</pre>";

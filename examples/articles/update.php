@@ -7,7 +7,7 @@
 
 use mixisLv\Reamaze\Api;
 use mixisLv\Reamaze\Exceptions\ApiException;
-use mixisLv\Reamaze\Params\Articles\GetParams;
+use mixisLv\Reamaze\Params\Articles\UpdateParams;
 
 include_once dirname(__FILE__) . './../../autoload.php';
 
@@ -31,7 +31,7 @@ $reamaze->debug = false;
 echo "<h3>Example 1</h3>";
 echo "<pre>";
 try {
-    $response = $reamaze->articles->get(new GetParams(['slug' => 'test']));
+    $response = $reamaze->articles->update(new UpdateParams(['slug' => 'test']));
     var_dump($response);
 } catch (ApiException $e) {
     var_dump($e->getMessage());

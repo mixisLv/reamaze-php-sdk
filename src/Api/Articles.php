@@ -11,6 +11,7 @@ use mixisLv\Reamaze\BaseApi;
 use mixisLv\Reamaze\Params\Articles\RetrieveParams;
 use mixisLv\Reamaze\Params\Articles\GetParams;
 use mixisLv\Reamaze\Params\Articles\CreateParams;
+use mixisLv\Reamaze\Params\Articles\UpdateParams;
 
 class Articles extends BaseApi
 {
@@ -26,9 +27,9 @@ class Articles extends BaseApi
      *
      * @param RetrieveParams|null $params
      *
+     * @return \stdClass
+     * @throws \mixisLv\Reamaze\Exceptions\ApiException
      * @see https://www.reamaze.com/api/get_articles
-     *
-     * @return mixed
      */
     public function retrieve(RetrieveParams $params = null)
     {
@@ -50,9 +51,9 @@ class Articles extends BaseApi
      *
      * @param GetParams|null $params
      *
+     * @return \stdClass
+     * @throws \mixisLv\Reamaze\Exceptions\ApiException
      * @see https://www.reamaze.com/api/get_article
-     *
-     * @return mixed
      */
     public function get(GetParams $params = null)
     {
@@ -74,14 +75,14 @@ class Articles extends BaseApi
      *
      * @param CreateParams|null $params
      *
-     * @see https://www.reamaze.com/api/get_article
-     *
-     * @return mixed
+     * @return \stdClass
+     * @throws \mixisLv\Reamaze\Exceptions\ApiException
+     * @see https://www.reamaze.com/api/post_article
      */
     public function create(CreateParams $params = null)
     {
         return $this->api->call(
-            ($params->slug ? 'articles/' . $params->slug : 'articles'),
+            ($params->slug ? 'topics/' . $params->slug . "/articles" : 'articles'),
             'POST',
             [
                 'article' => [
@@ -93,5 +94,34 @@ class Articles extends BaseApi
         );
     }
 
-
+    /**
+     * update
+     *
+     * <code>
+     *     $params = new UpdateParams();
+     *     $params->slug  = 'test';
+     *     $params->title = 'new title';
+     *     $params->body  = 'new body';
+     *     $response      = $reamaze->articles->update($params);
+     * </code>
+     *
+     * @param UpdateParams $params
+     *
+     * @return \stdClass
+     * @throws \mixisLv\Reamaze\Exceptions\ApiException
+     * @see https://www.reamaze.com/api/put_article
+     */
+    public function update(UpdateParams $params = null)
+    {
+        return $this->api->call(
+            'articles/' . $params->slug,
+            'PUT',
+            [
+                'article' => [
+                    'title' => $params->title,
+                    'body'  => $params->body,
+                ]
+            ]
+        );
+    }
 }
