@@ -28,11 +28,10 @@ if (!defined('REAMAZE_TOKEN')) {
 }
 
 $reamaze        = new Api(REAMAZE_BRAND, REAMAZE_LOGIN, REAMAZE_TOKEN);
-$reamaze->debug = false;
+$reamaze->debug = true;
 
 /**
  * @todo "not found" error?
- * @todo can update email?
  */
 
 // Update contact
@@ -45,7 +44,7 @@ try {
             ]
         ]
     );
-    $response = $reamaze->contacts->update('test@example.com', $contact);
+    $response = $reamaze->contacts->update('recipient@example.com', $contact);
     var_dump($response);
 } catch (ApiException $e) {
     var_dump($e->getMessage());

@@ -30,23 +30,28 @@ if (!defined('REAMAZE_TOKEN')) {
 $reamaze        = new Api(REAMAZE_BRAND, REAMAZE_LOGIN, REAMAZE_TOKEN);
 $reamaze->debug = false;
 
-// Example 1
+echo "<h3>Example 1</h3>";
+echo "<pre>";
 try {
     $response = $reamaze->contacts->retrieve();
     var_dump($response);
 } catch (ApiException $e) {
     var_dump($e->getMessage());
 }
+echo "</pre>";
 
-// Example 2
+echo "<h3>Example 2</h3>";
+echo "<pre>";
 try {
     $response = $reamaze->contacts->retrieve(new RetrieveParams(['page' => 2]));
     var_dump($response);
 } catch (ApiException $e) {
     var_dump($e->getMessage());
 }
+echo "</pre>";
 
-// Example 3
+echo "<h3>Example 3</h3>";
+echo "<pre>";
 try {
     $response = $reamaze->contacts->retrieve(new RetrieveParams(['page' => 1, 'q' => 'test@example.com']));
     var_dump($response);

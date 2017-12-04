@@ -191,7 +191,7 @@ class Api
     {
         $errorMsg = false;
         if (isset($response, $response->errors)) {
-            $errorMsg = implode(', ', array_map(function ($v, $k) { return $k . ': ' . implode(',', $v); }, $response->errors, array_keys($response->errors)));
+            $errorMsg = implode(', ', array_map(function ($v, $k) { return $k . ': ' . implode(',', $v); }, (array)$response->errors, array_keys((array)$response->errors)));
         }
         if (isset($response, $response->error)) {
             $errorMsg = $response->error;

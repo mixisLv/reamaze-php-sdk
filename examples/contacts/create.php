@@ -30,12 +30,14 @@ if (!defined('REAMAZE_TOKEN')) {
 $reamaze        = new Api(REAMAZE_BRAND, REAMAZE_LOGIN, REAMAZE_TOKEN);
 $reamaze->debug = false;
 
-// Example 1
+echo "<h3>Example 1</h3>";
+echo "<pre>";
 try {
     $contact  = new CreateParams(
         [
-            'name'  => 'My Test Contact',   
-            'email' => 'test@example.com',
+            'id'    => '123',
+            'name'  => 'bob',
+            'email' => 'bob@example.com',
             'data'  => [
                 'custom_attribute' => 'custom data'
             ]
@@ -46,3 +48,24 @@ try {
 } catch (ApiException $e) {
     var_dump($e->getMessage());
 }
+echo "</pre>";
+
+echo "<h3>Example 2</h3>";
+echo "<pre>";
+try {
+    $contact  = new CreateParams(
+        [
+            'id'     => '123',
+            'name'   => 'bob',
+            'mobile' => '+12223334444',
+            'data'   => [
+                'custom_attribute' => 'custom data'
+            ]
+        ]
+    );
+    $response = $reamaze->contacts->create($contact);
+    var_dump($response);
+} catch (ApiException $e) {
+    var_dump($e->getMessage());
+}
+echo "</pre>";

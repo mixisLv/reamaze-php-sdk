@@ -25,23 +25,39 @@ class Contacts extends BaseApi
      * </code>
      *
      * @param RetrieveParams|null $params
+     *
+     * @return object
+     * @throws \mixisLv\Reamaze\Exceptions\ApiException
      * @see https://www.reamaze.com/api/get_contacts
      *
-     * @return mixed
      */
     public function retrieve(RetrieveParams $params = null)
     {
-        $page = max(1, (int)$params->page);
-        $q    = (string)$params->q;
-
-        return $this->api->call('contacts', 'GET', ['q' => $q, 'page' => $page]);
+        return $this->api->call('contacts', 'GET', ['q' => $params->q, 'page' => $params->page]);
     }
 
+    /**
+     * create
+     *
+     * @param CreateParams $params
+     *
+     * @return \stdClass
+     * @throws \mixisLv\Reamaze\Exceptions\ApiException
+     */
     public function create(CreateParams $params)
     {
         return $this->api->call('contacts', 'POST', ['contact' => $params->toArray()]);
     }
 
+    /**
+     * update
+     *
+     * @param              $email
+     * @param UpdateParams $params
+     *
+     * @return \stdClass
+     * @throws \mixisLv\Reamaze\Exceptions\ApiException
+     */
     public function update($email, UpdateParams $params)
     {
         return $this->api->call('contacts/' . $email, 'PUT', ['contact' => $params->toArray()]);
