@@ -52,7 +52,7 @@ class Contacts extends BaseApi
     /**
      * update
      *
-     * @param              $email
+     * @param  string      $email
      * @param UpdateParams $params
      *
      * @return \stdClass
