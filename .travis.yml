@@ -1,1 +1,19 @@
 language: php
+
+before_script:
+  - php -v
+  - composer install --prefer-dist --no-progress --no-suggest --no-interaction
+
+testing:
+  only:
+      - master
+  script:
+#  - echo "Running PHP Unit test"
+#  - php vendor/bin/phpunit --colors --coverage-text
+#  - php vendor/bin/phpunit --colors
+  - echo "Running PHP CodeSniffer"
+  - php vendor/bin/phpcs --config-set ignore_warnings_on_exit 1
+  - php vendor/bin/phpcs --standard=PSR2 -w --colors src
+  - echo "Running PHP Mess Detector"
+  - php vendor/bin/phpmd src text controversial,design,unusedcode
+  allow_failure: true
