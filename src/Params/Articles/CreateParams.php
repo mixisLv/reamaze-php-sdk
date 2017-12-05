@@ -91,7 +91,4 @@ class CreateParams extends BaseParams
     {
         return (string)$value;
     }
-
-
-
 }
