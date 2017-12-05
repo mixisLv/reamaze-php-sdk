@@ -18,7 +18,9 @@ use mixisLv\Reamaze\Params\BaseParams;
 class CreateParams extends BaseParams
 {
     /**
-     * @var string uniquely identifies a contact and should correspond to the id internal to your application or authentication system.
+     * Uniquely identifies a contact and should correspond to the id
+     * internal to your application or authentication system.
+     * @var string
      */
     protected $id = '';
 

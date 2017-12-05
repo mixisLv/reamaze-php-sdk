@@ -62,5 +62,4 @@ class Contacts extends BaseApi
     {
         return $this->api->call('contacts/' . $email, 'PUT', ['contact' => $params->toArray()]);
     }
-
 }

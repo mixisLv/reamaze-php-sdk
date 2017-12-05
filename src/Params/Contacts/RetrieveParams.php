@@ -24,12 +24,12 @@ use mixisLv\Reamaze\Params\BaseParams;
 class RetrieveParams extends BaseParams
 {
     /**
-     * Contacts that have an email
+     * Contacts that have an email.
      */
     const TYPE_EMAIL = 'email';
 
     /**
-     * Contacts that have a phone number
+     * Contacts that have a phone number.
      */
     const TYPE_MOBILE = 'mobile';
 
@@ -39,22 +39,29 @@ class RetrieveParams extends BaseParams
     protected $page = 1;
 
     /**
-     * @var string with any string will search over contacts by name or email
+     * Any string will search over contacts by name or email.
+     * @var string
      */
     protected $q = '';
 
     /**
-     * @var array with a hash of key/value pairs (e.g. `data[key]=value`) will return contacts with `data` matching those key/value pairs.
+     * A hash of key/value pairs (e.g. `data[key]=value`) will return
+     * contacts with `data`matching those key/value pairs.
+     * @var array
      */
     protected $data = [];
 
     /**
-     * @var string with value set to `date` will return results in descending order of create time. The default sort when this parameter is not provided is by name.
+     * Value set to `date` will return results in descending order of create time.
+     * The default sort when this parameter is not provided is by name.
+     * @var string
      */
     protected $sort = '';
 
     /**
-     * @var string with values set to `email` or `mobile` will return only contacts that have an email address or phone number, respectively.
+     * Values set to `email` or `mobile` will return only contacts
+     * that have an email address or phone number, respectively.
+     * @var string
      */
     protected $type = '';
 
