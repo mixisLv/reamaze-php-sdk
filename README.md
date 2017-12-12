@@ -11,7 +11,9 @@ The following PHP extension is required:
 * json
 * curl
 
-##Installing
+## Installation
+
+Run the following to include this via Composer
 
     composer require "mixislv/reamaze-php-sdk" "2.0.*"
 
@@ -22,4 +24,4 @@ Or by adding the following to your composer.json:
     }
 
 ## Examples
-Check out examples directory for usage examples
+Check out [examples](./examples) directory for usage examples
