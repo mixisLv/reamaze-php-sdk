@@ -6,6 +6,8 @@ A PHP library for the Reamaze Core API.
 
 This PHP library allows you to easily integrate Reamaze with PHP.
 
+## Requirements
+
 The following PHP extension is required:
 
 * json
@@ -23,5 +25,21 @@ Or by adding the following to your composer.json:
         "mixislv/reamaze-php-sdk": "2.0.*"
     }
 
-## Examples
-Check out [examples](./examples) directory for usage examples
+## Usage
+
+```php
+use mixisLv\Reamaze\Api;
+use mixisLv\Reamaze\Exceptions\ApiException;
+use mixisLv\Reamaze\Params\Articles\GetParams;
+
+$reamaze        = new Api(REAMAZE_BRAND, REAMAZE_LOGIN, REAMAZE_TOKEN);
+
+try {
+    $response = $reamaze->articles->get(new GetParams(['slug' => 'test']));
+    var_dump($response);
+} catch (ApiException $e) {
+    var_dump($e->getMessage());
+}
+```
+
+Check out [examples](./examples) directory for more usage examples.
