@@ -32,7 +32,7 @@ use mixisLv\Reamaze\Api;
 use mixisLv\Reamaze\Exceptions\ApiException;
 use mixisLv\Reamaze\Params\Articles\GetParams;
 
-$reamaze        = new Api(REAMAZE_BRAND, REAMAZE_LOGIN, REAMAZE_TOKEN);
+$reamaze = new Api(REAMAZE_BRAND, REAMAZE_LOGIN, REAMAZE_TOKEN);
 
 try {
     $response = $reamaze->articles->get(new GetParams(['slug' => 'test']));
