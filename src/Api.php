@@ -47,7 +47,7 @@ class Api
     /**
      * @var resource cURL handle
      */
-    private $ch;
+    private $curl;
 
     /**
      * @var boolean
@@ -65,20 +65,20 @@ class Api
         $this->loginEmail = $loginEmail;
         $this->apiToken   = $apiToken;
 
-        $this->ch = curl_init();
-        curl_setopt($this->ch, CURLOPT_USERAGENT, 'mixisLv/reamaze-php-sdk v2.0 (' . $brand . ')');
-        curl_setopt($this->ch, CURLOPT_HEADER, false);
-        curl_setopt($this->ch, CURLOPT_HTTPHEADER, array('Accept: application/json', 'Content-Type: application/json'));
-        curl_setopt($this->ch, CURLOPT_USERPWD, $this->loginEmail . ":" . $this->apiToken);
-        curl_setopt($this->ch, CURLOPT_SSL_VERIFYPEER, $this->debug);
-        curl_setopt($this->ch, CURLOPT_CONNECTTIMEOUT, 30);
-        curl_setopt($this->ch, CURLOPT_TIMEOUT, 600);
-        curl_setopt($this->ch, CURLOPT_RETURNTRANSFER, true);
+        $this->curl = curl_init();
+        curl_setopt($this->curl, CURLOPT_USERAGENT, 'mixisLv/reamaze-php-sdk v2.0 (' . $brand . ')');
+        curl_setopt($this->curl, CURLOPT_HEADER, false);
+        curl_setopt($this->curl, CURLOPT_HTTPHEADER, ['Accept: application/json', 'Content-Type: application/json']);
+        curl_setopt($this->curl, CURLOPT_USERPWD, $this->loginEmail . ":" . $this->apiToken);
+        curl_setopt($this->curl, CURLOPT_SSL_VERIFYPEER, $this->debug);
+        curl_setopt($this->curl, CURLOPT_CONNECTTIMEOUT, 30);
+        curl_setopt($this->curl, CURLOPT_TIMEOUT, 600);
+        curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, true);
     }
 
     public function __destruct()
     {
-        curl_close($this->ch);
+        curl_close($this->curl);
     }
 
     /**
@@ -140,23 +140,23 @@ class Api
         if ($this->debug) {
             //$curlBuffer = fopen('php://memory', 'rw+');
             $curlBuffer = fopen('php://temp', 'rw+');
-            curl_setopt($this->ch, CURLOPT_STDERR, $curlBuffer);
+            curl_setopt($this->curl, CURLOPT_STDERR, $curlBuffer);
         }
 
-        curl_setopt($this->ch, CURLOPT_URL, $url);
-        curl_setopt($this->ch, CURLOPT_POST, $isPost ? 1 : 0);
-        curl_setopt($this->ch, CURLOPT_VERBOSE, $this->debug);
+        curl_setopt($this->curl, CURLOPT_URL, $url);
+        curl_setopt($this->curl, CURLOPT_POST, $isPost ? 1 : 0);
+        curl_setopt($this->curl, CURLOPT_VERBOSE, $this->debug);
 
         if ($isPost || $isPut) {
             $paramsJsonString = json_encode($params);
             if ($this->debug) {
                 $this->log('POST/PUT params: ' . $paramsJsonString);
             }
-            curl_setopt($this->ch, CURLOPT_POSTFIELDS, $paramsJsonString);
+            curl_setopt($this->curl, CURLOPT_POSTFIELDS, $paramsJsonString);
         }
 
-        $responseBody = curl_exec($this->ch);
-        $info         = curl_getinfo($this->ch);
+        $responseBody = curl_exec($this->curl);
+        $info         = curl_getinfo($this->curl);
         $time         = microtime(true) - $start;
         if ($this->debug) {
             rewind($curlBuffer);
@@ -166,14 +166,21 @@ class Api
         $this->log('Completed in ' . number_format($time * 1000, 2) . 'ms');
         $this->log('Got response: ' . $responseBody);
 
-        if (curl_error($this->ch)) {
-            $response['error'] = curl_error($this->ch);
+        if (curl_error($this->curl)) {
+            $response['error'] = curl_error($this->curl);
             $this->error(500, $response);
         }
         $response = json_decode($responseBody, false);
 
-        if ($response === null || isset($response->error) || isset($response->errors) || floor($info['http_code'] / 100) >= 4) {
-            $this->error($info['http_code'], $response !==null ? $response : $responseBody);
+        if ($response === null
+            ||
+            isset($response->error)
+            ||
+            isset($response->errors)
+            ||
+            floor($info['http_code'] / 100) >= 4
+        ) {
+            $this->error($info['http_code'], $response !== null ? $response : $responseBody);
         }
 
         return $response;
@@ -191,33 +198,73 @@ class Api
     {
         $errorMsg = false;
         if (isset($response, $response->errors)) {
-            $errorMsg = implode(', ', array_map(function ($v, $k) { return $k . ': ' . implode(',', $v); }, (array)$response->errors, array_keys((array)$response->errors)));
+            $errorMsg = $this->implodeErrors((array)$response->errors);
         }
         if (isset($response, $response->error)) {
             $errorMsg = $response->error;
         }
-        if(is_string($response)) {
+        if (is_string($response)) {
             $errorMsg = $response;
         }
 
-        switch ($code) {
-            case 404:
-                throw new ApiException($errorMsg ? $errorMsg : 'Not found', $code);
-                break;
-            case 403:
-                throw new ApiException($errorMsg ? $errorMsg : 'Forbidden', $code);
-                break;
-            case 422:
-                throw new ApiException($errorMsg ? 'Unprocessable Entity: ' . $errorMsg : 'Unprocessable Entity', $code);
-                break;
-            case 429:
-                throw new ApiException($errorMsg ? $errorMsg : 'Too Many Requests', $code);
-                break;
-            default:
-                throw new ApiException($errorMsg ? $errorMsg : 'Unknown error', $code);
-        }
+        $message = $this->errorMessage($code, $errorMsg);
+
+        throw new ApiException($message, $code);
     }
 
+    /**
+     * errorMessage
+     *
+     * @param $code
+     * @param $errorMsg
+     * @return mixed|string
+     */
+    private function errorMessage($code, $errorMsg)
+    {
+        $errorCodes = [
+            0   => 'Unknown error',
+            404 => 'Not found',
+            403 => 'Forbidden',
+            429 => 'Too Many Requests',
+            422 => 'Unprocessable Entity',
+        ];
+        
+        switch ($code) {
+            case 404:
+            case 403:
+            case 429:
+                $message = $errorMsg ? $errorMsg : $errorCodes[$code];
+                break;
+            case 422:
+                $message = $errorMsg ? 'Unprocessable Entity: ' . $errorMsg : $errorCodes[$code];
+                break;
+            default:
+                $message = $errorMsg ? $errorMsg : $errorCodes[0];
+        }
+
+        return $message;
+    }
+
+    /**
+     * implodeErrors
+     *
+     * @param array $errors
+     * @return string
+     */
+    private function implodeErrors(array $errors)
+    {
+        return implode(
+            ', ',
+            array_map(
+                function ($value, $key) {
+                    return $key . ': ' . implode(',', $value);
+                },
+                (array)$errors,
+                array_keys((array)$errors)
+            )
+        );
+    }
+    
     /**
      * log
      *
@@ -229,5 +276,4 @@ class Api
             echo '<pre>', $message, '</pre>';
         }
     }
-
 }
