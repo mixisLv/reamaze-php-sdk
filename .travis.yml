@@ -1,5 +1,8 @@
 language: php
 
+php:
+  - '7.0'
+
 before_script:
   - php -v
   - composer install --prefer-dist --no-progress --no-suggest --no-interaction
