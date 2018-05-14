@@ -172,18 +172,28 @@ class Api
         }
         $response = json_decode($responseBody, false);
 
+        if ($this->isError($response, $info['http_code'])) {
+            $this->error($info['http_code'], $response !== null ? $response : $responseBody);
+        }
+
+        return $response;
+    }
+
+    private function isError($response, $httpCode)
+    {
+        $error = false;
         if ($response === null
             ||
             isset($response->error)
             ||
             isset($response->errors)
             ||
-            floor($info['http_code'] / 100) >= 4
+            floor($httpCode / 100) >= 4
         ) {
-            $this->error($info['http_code'], $response !== null ? $response : $responseBody);
+            $error = true;
         }
 
-        return $response;
+        return $error;
     }
 
     /**
