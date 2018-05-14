@@ -1,6 +1,9 @@
 # Reamaze PHP SDK
 
 [![Project Status: WIP - Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](http://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus.org/#wip)
+[![GitHub license](https://img.shields.io/github/license/mixisLv/reamaze-php-sdk.svg)](https://github.com/mixisLv/reamaze-php-sdk/blob/master/LICENSE)
+[![GitHub release](https://img.shields.io/github/release/mixisLv/reamaze-php-sdk.svg)]()
+
 
 A PHP library for the Reamaze Core API. 
 
