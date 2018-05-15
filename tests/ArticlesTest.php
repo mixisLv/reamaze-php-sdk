@@ -17,12 +17,16 @@ use PHPUnit\Framework\TestCase;
 
 final class ArticlesTest extends TestCase
 {
+    private $brand      = 'REAMAZE-BRAND';
+    private $loginEmail = 'REAMAZE-LOGIN';
+    private $apiToken   = 'REAMAZE-TOKEN';
+
     /**
      * @expectedException     \mixisLv\Reamaze\Exceptions\ApiException
      */
     public function testArticleNotFound()
     {
-        $reamaze = new Api(REAMAZE_BRAND, REAMAZE_LOGIN, REAMAZE_TOKEN);
+        $reamaze = new Api($this->brand, $this->loginEmail, $this->apiToken);
         $reamaze->articles->get(new GetParams(['slug' => 'nonexistent-slug']));
     }
 }
