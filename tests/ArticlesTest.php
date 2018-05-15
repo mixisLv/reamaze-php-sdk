@@ -11,7 +11,6 @@
 namespace SebastianBergmann\Comparator;
 
 use mixisLv\Reamaze\Api;
-use mixisLv\Reamaze\Exceptions\ApiException;
 use mixisLv\Reamaze\Params\Articles\GetParams;
 
 use PHPUnit\Framework\TestCase;
@@ -19,7 +18,7 @@ use PHPUnit\Framework\TestCase;
 final class ArticlesTest extends TestCase
 {
     /**
-     * @expectedException     ApiException
+     * @expectedException     \mixisLv\Reamaze\Exceptions\ApiException
      */
     public function testArticleNotFound()
     {
