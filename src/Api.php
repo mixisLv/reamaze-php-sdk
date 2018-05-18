@@ -7,12 +7,12 @@
 
 namespace mixisLv\Reamaze;
 
-use mixisLv\Reamaze\Exceptions\ApiException;
 use mixisLv\Reamaze\Api\Articles;
+use mixisLv\Reamaze\Api\Channels;
 use mixisLv\Reamaze\Api\Contacts;
 use mixisLv\Reamaze\Api\Conversations;
 use mixisLv\Reamaze\Api\Messages;
-use mixisLv\Reamaze\Api\Channels;
+use mixisLv\Reamaze\Exceptions\ApiException;
 
 /**
  * Class Api
@@ -24,13 +24,16 @@ use mixisLv\Reamaze\Api\Channels;
  * @property Conversations $conversations
  * @property Messages $messages
  * @property Channels $channels
-
  *
  * @author Mikus Rozenbergs <mikus.rozenbergs@gmail.com>
  */
 class Api
 {
 
+    /**
+     * @var boolean
+     */
+    public $debug;
     /**
      * @var string Reamaze brand
      */
@@ -43,16 +46,10 @@ class Api
      * @var string Reamaze token
      */
     private $apiToken;
-
     /**
      * @var resource cURL handle
      */
     private $curl;
-
-    /**
-     * @var boolean
-     */
-    public $debug;
 
     /**
      * @param string $brand your Reamaze brand
@@ -110,6 +107,7 @@ class Api
                     $this->$property = new Channels($this);
                     break;
             }
+
             return isset($this->$property) ? $this->$property : null;
         }
     }
@@ -127,13 +125,9 @@ class Api
     public function call($action, $method, array $params)
     {
         $start  = microtime(true);
-        $url    = 'https://' . $this->brand . '.reamaze.io/api/v1/' . $action;
         $isPost = $method == 'POST';
         $isPut  = $method == 'PUT';
-
-        if (!$isPost && !$isPut && !empty($params)) {
-            $url .= '?' . http_build_query($params);
-        }
+        $url    = $this->getUrl($action, $method, $params);
 
         $this->log('Call to: ' . $url);
         $this->log('Params: ' . var_export($params, true));
@@ -148,11 +142,7 @@ class Api
         curl_setopt($this->curl, CURLOPT_VERBOSE, $this->debug);
 
         if ($isPost || $isPut) {
-            $paramsJsonString = json_encode($params);
-            if ($this->debug) {
-                $this->log('POST/PUT params: ' . $paramsJsonString);
-            }
-            curl_setopt($this->curl, CURLOPT_POSTFIELDS, $paramsJsonString);
+            curl_setopt($this->curl, CURLOPT_POSTFIELDS, $this->paramsToJson($params));
         }
 
         $responseBody = curl_exec($this->curl);
@@ -166,8 +156,10 @@ class Api
         $this->log('Completed in ' . number_format($time * 1000, 2) . 'ms');
         $this->log('Got response: ' . $responseBody);
 
-        if (curl_error($this->curl)) {
-            $response['error'] = curl_error($this->curl);
+        $curlError = curl_error($this->curl);
+
+        if ($curlError) {
+            $response['error'] = $curlError;
             $this->error(500, $response);
         }
         $response = json_decode($responseBody, false);
@@ -179,21 +171,37 @@ class Api
         return $response;
     }
 
-    private function isError($response, $httpCode)
+    private function getUrl($action, $method, $params)
     {
-        $error = false;
-        if ($response === null
-            ||
-            isset($response->error)
-            ||
-            isset($response->errors)
-            ||
-            floor($httpCode / 100) >= 4
-        ) {
-            $error = true;
+        $url = 'https://' . $this->brand . '.reamaze.io/api/v1/' . $action;
+
+        if (!in_array($method, ['POST', 'PUT']) && !empty($params)) {
+            $url .= '?' . http_build_query($params);
         }
 
-        return $error;
+        return $url;
+    }
+
+    /**
+     * log
+     *
+     * @param string $message
+     */
+    protected function log($message)
+    {
+        if ($this->debug) {
+            echo '<pre>', $message, '</pre>';
+        }
+    }
+
+    private function paramsToJson($params)
+    {
+        $paramsJsonString = json_encode($params);
+        if ($this->debug) {
+            $this->log('POST/PUT params: ' . $paramsJsonString);
+        }
+
+        return $paramsJsonString;
     }
 
     /**
@@ -223,39 +231,6 @@ class Api
     }
 
     /**
-     * errorMessage
-     *
-     * @param $code
-     * @param $errorMsg
-     * @return mixed|string
-     */
-    private function errorMessage($code, $errorMsg)
-    {
-        $errorCodes = [
-            0   => 'Unknown error',
-            404 => 'Not found',
-            403 => 'Forbidden',
-            429 => 'Too Many Requests',
-            422 => 'Unprocessable Entity',
-        ];
-        
-        switch ($code) {
-            case 404:
-            case 403:
-            case 429:
-                $message = $errorMsg ? $errorMsg : $errorCodes[$code];
-                break;
-            case 422:
-                $message = $errorMsg ? 'Unprocessable Entity: ' . $errorMsg : $errorCodes[$code];
-                break;
-            default:
-                $message = $errorMsg ? $errorMsg : $errorCodes[0];
-        }
-
-        return $message;
-    }
-
-    /**
      * implodeErrors
      *
      * @param array $errors
@@ -274,16 +249,61 @@ class Api
             )
         );
     }
-    
+
     /**
-     * log
+     * errorMessage
      *
-     * @param string $message
+     * @param $code
+     * @param $errorMsg
+     * @return mixed|string
      */
-    protected function log($message)
+    private function errorMessage($code, $errorMsg)
     {
-        if ($this->debug) {
-            echo '<pre>', $message, '</pre>';
+        $errorCodes = [
+            0   => 'Unknown error',
+            404 => 'Not found',
+            403 => 'Forbidden',
+            429 => 'Too Many Requests',
+            422 => 'Unprocessable Entity',
+        ];
+
+        switch ($code) {
+            case 404:
+            case 403:
+            case 429:
+                $message = $errorMsg ? $errorMsg : $errorCodes[$code];
+                break;
+            case 422:
+                $message = $errorMsg ? 'Unprocessable Entity: ' . $errorMsg : $errorCodes[$code];
+                break;
+            default:
+                $message = $errorMsg ? $errorMsg : $errorCodes[0];
         }
+
+        return $message;
+    }
+
+    /**
+     * isError
+     *
+     * @param $response
+     * @param $httpCode
+     * @return bool
+     */
+    private function isError($response, $httpCode)
+    {
+        $error = false;
+        if ($response === null
+            ||
+            isset($response->error)
+            ||
+            isset($response->errors)
+            ||
+            floor($httpCode / 100) >= 4
+        ) {
+            $error = true;
+        }
+
+        return $error;
     }
 }
