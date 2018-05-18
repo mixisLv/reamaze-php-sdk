@@ -33,26 +33,29 @@ $reamaze->debug = false;
 
 // Create conversation
 try {
+    $text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+             Nullam rutrum cursus arcu, et viverra nisl finibus molestie.";
+
     $conversation = new CreateParams(
         [
             "subject"  => "new conversation",
             "category" => "support",
             "tag_list" => [
                 "API",
-                "test"
+                "test",
             ],
             "message"  => [
-                "body"                  => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam rutrum cursus arcu, et viverra nisl finibus molestie.",
+                "body"                  => $text,
                 "recipients"            => ["recipient@example.com"],
-                "suppress_notification" => true
+                "suppress_notification" => true,
             ],
             "user"     => [
                 "name"  => "Lorem Ipsum",
-                "email" => "lorem.ipsum@example.com"
+                "email" => "lorem.ipsum@example.com",
             ],
             'data'     => [
-                'custom_attribute' => 'custom data'
-            ]
+                'custom_attribute' => 'custom data',
+            ],
         ]
     );
     $response     = $reamaze->conversations->create($conversation);

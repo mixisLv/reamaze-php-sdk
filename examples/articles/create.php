@@ -23,12 +23,12 @@ $reamaze->debug = false;
 echo "<h3>Example 1</h3>";
 echo "<pre>";
 
-$params = new CreateParams();
-
-$params->title = 'Article title';
-$params->body  = 'Article without slug';
-
 try {
+    $params = new CreateParams();
+
+    $params->title = 'Article title';
+    $params->body  = 'Article without slug';
+
     $response = $reamaze->articles->create($params);
     var_dump($response);
 } catch (ApiException $e) {
@@ -40,12 +40,12 @@ echo "</pre>";
 echo "<h3>Example 2</h3>";
 echo "<pre>";
 
-$params = new CreateParams(['slug' => 'test']);
-
-$params->title = 'Article title';
-$params->body  = 'Article with slug';
-
 try {
+    $params = new CreateParams(['slug' => 'test']);
+
+    $params->title = 'Article title';
+    $params->body  = 'Article with slug';
+
     $response = $reamaze->articles->create($params);
     var_dump($response);
 } catch (ApiException $e) {

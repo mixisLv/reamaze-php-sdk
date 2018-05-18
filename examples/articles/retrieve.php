@@ -62,9 +62,10 @@ echo "</pre>";
 
 echo "<h3>Example 5</h3>";
 echo "<pre>";
-$retrieveParams    = new RetrieveParams(['slug' => 'test']);
-$retrieveParams->q = 'test';
 try {
+    $retrieveParams    = new RetrieveParams(['slug' => 'test']);
+    $retrieveParams->q = 'test';
+
     $response = $reamaze->articles->retrieve($retrieveParams);
     var_dump($response);
 } catch (ApiException $e) {

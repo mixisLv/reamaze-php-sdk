@@ -33,21 +33,24 @@ $reamaze->debug = false;
 
 // Create message
 try {
+    $text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+             Nullam rutrum cursus arcu, et viverra nisl finibus molestie.";
+
     /** @var CreateParams $message */
     $message = new CreateParams(
         [
-            "body"                  => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam rutrum cursus arcu, et viverra nisl finibus molestie.",
+            "body"                  => $text,
             "recipients"            => ["recipient@example.com"],
             "suppress_notification" => true,
             "suppress_autoresolve"  => true,
             "user"                  => [
                 "name"  => "Lorem Ipsum",
-                "email" => "lorem.ipsum@example.com"
-            ]
+                "email" => "lorem.ipsum@example.com",
+            ],
         ]
     );
 
-    $response     = $reamaze->messages->create('new-conversation', $message);
+    $response = $reamaze->messages->create('new-conversation', $message);
     var_dump($response);
 } catch (ApiException $e) {
     var_dump($e);
