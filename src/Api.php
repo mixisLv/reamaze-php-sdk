@@ -122,7 +122,7 @@ class Api
     public function call($action, $method, array $params)
     {
         $start  = microtime(true);
-        $url    = 'https://' . $this->brand . '.reamaze.com/api/v1/' . $action;
+        $url    = 'https://' . $this->brand . '.reamaze.io/api/v1/' . $action;
         $isPost = $method == 'POST';
         $isPut  = $method == 'PUT';
 
