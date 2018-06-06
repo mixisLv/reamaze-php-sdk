@@ -5,7 +5,7 @@
 [![GitHub release](https://img.shields.io/github/release/mixisLv/reamaze-php-sdk.svg)]()
 
 
-A PHP library for the Reamaze Core API. 
+## A PHP client library for accessing Reamaze API
 
 This PHP library allows you to easily integrate Reamaze with PHP.
 
