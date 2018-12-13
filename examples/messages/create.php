@@ -41,8 +41,8 @@ try {
         [
             "body"                  => $text,
             "recipients"            => ["recipient@example.com"],
-            "suppress_notification" => true,
-            "suppress_autoresolve"  => true,
+            "suppressNotification"  => true,
+            "suppressAutoresolve"   => true,
             "user"                  => [
                 "name"  => "Lorem Ipsum",
                 "email" => "lorem.ipsum@example.com",

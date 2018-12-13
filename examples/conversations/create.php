@@ -40,7 +40,7 @@ try {
         [
             "subject"  => "new conversation",
             "category" => "support",
-            "tag_list" => [
+            "tagList"  => [
                 "API",
                 "test",
             ],

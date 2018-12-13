@@ -26,7 +26,7 @@ class Contacts extends BaseApi
      *
      * @param RetrieveParams|null $params
      *
-     * @return object
+     * @return \stdClass
      * @throws \mixisLv\Reamaze\Exceptions\ApiException
      * @see https://www.reamaze.com/api/get_contacts
      *
@@ -43,6 +43,7 @@ class Contacts extends BaseApi
      *
      * @return \stdClass
      * @throws \mixisLv\Reamaze\Exceptions\ApiException
+     * @see https://www.reamaze.com/api/post_contacts
      */
     public function create(CreateParams $params)
     {
@@ -57,6 +58,7 @@ class Contacts extends BaseApi
      *
      * @return \stdClass
      * @throws \mixisLv\Reamaze\Exceptions\ApiException
+     * @see https://www.reamaze.com/api/put_contacts
      */
     public function update($email, UpdateParams $params)
     {

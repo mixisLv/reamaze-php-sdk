@@ -8,12 +8,38 @@
 namespace mixisLv\Reamaze\Api;
 
 use mixisLv\Reamaze\BaseApi;
-use mixisLv\Reamaze\Params\Conversations\CreateParams;
-use mixisLv\Reamaze\Params\Conversations\RetrieveParams;
+use mixisLv\Reamaze\Params\Conversations\CreateParams as ConversationsCreateParams;
+use mixisLv\Reamaze\Params\Conversations\RetrieveParams as ConversationsRetrieveParams;
 
 class Conversations extends BaseApi
 {
-    private function prepareRetrieveParams(RetrieveParams $params = null)
+    /**
+     * prepareCreateParams
+     *
+     * @param ConversationsCreateParams|null $params
+     *
+     * @return array
+     */
+    private function prepareCreateParams(ConversationsCreateParams $params = null)
+    {
+        return [
+            'subject'   => $params->subject,
+            'category'   => $params->category,
+            'tag_list'   => $params->tagList,
+            'message'   => $params->message,
+            'user'   => $params->user,
+            'data '   => $params->data,
+        ];
+    }
+
+    /**
+     * prepareRetrieveParams
+     *
+     * @param ConversationsRetrieveParams|null $params
+     *
+     * @return array
+     */
+    private function prepareRetrieveParams(ConversationsRetrieveParams $params = null)
     {
         return [
             'page'   => $params->page,
@@ -28,12 +54,13 @@ class Conversations extends BaseApi
     /**
      * retrieve
      *
-     * @param RetrieveParams|null $params
+     * @param ConversationsRetrieveParams|null $params
      *
-     * @return string
+     * @return \stdClass
      * @throws \mixisLv\Reamaze\Exceptions\ApiException
+     * @see https://www.reamaze.com/api/get_conversations
      */
-    public function retrieve(RetrieveParams $params = null)
+    public function retrieve(ConversationsRetrieveParams $params = null)
     {
         return $this->api->call(
             'conversations',
@@ -45,17 +72,18 @@ class Conversations extends BaseApi
     /**
      * create
      *
-     * @param CreateParams $params
+     * @param ConversationsCreateParams $params
      *
-     * @return string
+     * @return \stdClass
      * @throws \mixisLv\Reamaze\Exceptions\ApiException
+     * @see https://www.reamaze.com/api/post_conversations
      */
-    public function create(CreateParams $params)
+    public function create(ConversationsCreateParams $params)
     {
         return $this->api->call(
             'conversations',
             'POST',
-            ['conversation' => $params->toArray()]
+            ['conversation' => $this->prepareCreateParams($params)]
         );
     }
 }

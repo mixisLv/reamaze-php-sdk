@@ -20,7 +20,7 @@ class CreateParams extends BaseParams
     /**
      * @var string conversation subject
      */
-    protected $subject = '';
+    public $subject = '';
 
     /**
      * The category attribute should be set to the slug of the Channel where this Conversation should be created.
@@ -29,13 +29,13 @@ class CreateParams extends BaseParams
      *
      * @var string conversation category
      */
-    protected $category = '';
+    public $category = '';
 
     /**
      * You can optionally pass in a tag_list array of strings to tag the conversation.
      * @var array conversation tags
      */
-    protected $tag_list  = [];
+    public $tagList  = [];
 
     /**
      * array['message']
@@ -54,12 +54,12 @@ class CreateParams extends BaseParams
      *
      * @var array conversation message (See above)
      */
-    protected $message  = [];
+    public $message  = [];
 
     /**
      * @var array conversation user
      */
-    protected $user  = [];
+    public $user  = [];
 
     /**
      * You can optionally pass in a data hash attribute as part of the conversation to pass
@@ -67,5 +67,5 @@ class CreateParams extends BaseParams
      *
      * @var array custom attributes
      */
-    protected $data  = [];
+    public $data  = [];
 }
