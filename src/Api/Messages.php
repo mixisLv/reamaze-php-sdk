@@ -26,5 +26,4 @@ class Messages extends BaseApi
     {
         return $this->api->call('conversations/' . $slug . '/messages', 'POST', ['message' => $params->toArray()]);
     }
-
 }

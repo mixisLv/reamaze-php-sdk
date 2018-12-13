@@ -13,6 +13,28 @@ use mixisLv\Reamaze\Params\Channels\RetrieveParams as ChannelRetrieveParams;
 class Channels extends BaseApi
 {
     /**
+     * getChannel
+     *
+     * @param string $channel
+     * @return string
+     */
+    private function getChannel($channel)
+    {
+        return $channel && in_array($channel, ChannelRetrieveParams::channelFilters()) ? $channel : '';
+    }
+
+    /**
+     * getAction
+     *
+     * @param string $slug
+     * @return string
+     */
+    private function getAction($slug)
+    {
+        return 'channels' . ($slug ? '/' . $slug : '');
+    }
+
+    /**
      * retrieve
      *
      * @param ChannelRetrieveParams $params
@@ -23,9 +45,13 @@ class Channels extends BaseApi
      */
     public function retrieve(ChannelRetrieveParams $params)
     {
-        $channel  = $params->channel && in_array($params->channel, ChannelRetrieveParams::channelFilters()) ? $params->channel : '';
-        $slug  = $params->slug;
+        $action  = $this->getAction($params->slug);
+        $channel = $this->getChannel($params->channel);
 
-        return $this->api->call('channels' . ($slug ? '/' . $slug : '') , 'GET', ['page' => $params->page, 'channel' => $channel ]);
+        return $this->api->call(
+            $action,
+            'GET',
+            ['page' => $params->page, 'channel' => $channel]
+        );
     }
 }

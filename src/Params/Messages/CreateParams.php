@@ -47,13 +47,14 @@ class CreateParams extends BaseParams
     protected $visibility = 0;
 
     /**
-     * @var bool (optional) true to prevent Reamaze from sending any email (or integration) notifications related to this message
+     * @var bool (optional) true to prevent Reamaze from sending any email (or integration)
+     * notifications related to this message
      */
     protected $suppress_notification = false;
 
     /**
-     * @var bool (optional) true to prevent Reamaze from marking the conversation as resolved when message[user] is a staff user.
+     * @var bool (optional) true to prevent Reamaze from marking the conversation as resolved
+     * when message[user] is a staff user.
      **/
     protected $suppress_autoresolve  = false;
-
 }

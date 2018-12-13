@@ -46,8 +46,11 @@ class CreateParams extends BaseParams
      *         [email]   string conversation author email
      *     [suppress_notification] boolean (optional)
      *
-     * You can optionally pass in a message[recipients] array attribute as part of the conversation to pass in additional participants in the conversation. These participants will be automatically added as recipients in future correspondences within the thread.
-     * You can optionally pass in a message[suppress_notification] boolean attribute with a value of true to prevent Reamaze from sending any email (or integration) notifications related to this message
+     * You can optionally pass in a message[recipients] array attribute as part of the conversation to pass in
+     * additional participants in the conversation. These participants will be automatically added as recipients
+     * in future correspondences within the thread.
+     * You can optionally pass in a message[suppress_notification] boolean attribute with a value of true to prevent
+     * Reamaze from sending any email (or integration) notifications related to this message
      *
      * @var array conversation message (See above)
      */
@@ -59,10 +62,10 @@ class CreateParams extends BaseParams
     protected $user  = [];
 
     /**
-     * You can optionally pass in a data hash attribute as part of the conversation to pass in custom field attributes for the conversation.
+     * You can optionally pass in a data hash attribute as part of the conversation to pass
+     * in custom field attributes for the conversation.
      *
      * @var array custom attributes
      */
     protected $data  = [];
 }
-

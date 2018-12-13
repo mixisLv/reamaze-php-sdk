@@ -32,7 +32,8 @@ class RetrieveParams extends BaseParams
     protected $slug = '';
 
     /**
-     * The visibility value can be the following values: 0 (Regular) or 1 (Internal Note) or 2 (Collision Detected Message).
+     * The visibility value can be the following values: 0 (Regular) or 1 (Internal Note)
+     * or 2 (Collision Detected Message).
      *
      * @var int message visibility
      */
@@ -60,5 +61,4 @@ class RetrieveParams extends BaseParams
     {
         return in_array($value, self::filters()) ? $value : '';
     }
-
 }

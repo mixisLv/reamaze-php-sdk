@@ -58,5 +58,4 @@ class RetrieveParams extends BaseParams
     {
         return in_array($value, self::channelFilters()) ? $value : '';
     }
-
 }
