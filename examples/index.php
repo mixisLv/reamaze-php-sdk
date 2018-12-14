@@ -82,7 +82,7 @@
 <?php } ?>
 
 
-<h2>Channels [ @todo ]</h2>
+<h2>Channels</h2>
 
 <?php foreach (['retrieve' => 'Retrieving Channels', 'get' => 'Get Channel'] as $key => $title) { ?>
     <h3>
