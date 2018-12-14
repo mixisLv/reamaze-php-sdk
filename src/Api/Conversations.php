@@ -11,6 +11,12 @@ use mixisLv\Reamaze\BaseApi;
 use mixisLv\Reamaze\Params\Conversations\CreateParams as ConversationsCreateParams;
 use mixisLv\Reamaze\Params\Conversations\RetrieveParams as ConversationsRetrieveParams;
 
+/**
+ * Class Conversations
+ * @package mixisLv\Reamaze\Api
+ *
+ * @author Mikus Rozenbergs <mikus.rozenbergs@gmail.com>
+ */
 class Conversations extends BaseApi
 {
     /**
