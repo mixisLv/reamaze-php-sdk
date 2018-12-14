@@ -17,7 +17,6 @@ use mixisLv\Reamaze\Params\BaseParams;
  */
 class RetrieveParams extends BaseParams
 {
-
     const FILTER_STAFF    = 'staff';
     const FILTER_CUSTOMER = 'customer';
 

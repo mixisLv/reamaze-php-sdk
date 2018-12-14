@@ -14,5 +14,3 @@ if (!defined('REAMAZE_LOGIN')) {
 if (!defined('REAMAZE_TOKEN')) {
     define('REAMAZE_TOKEN', 'your-token');
 }
-
-
