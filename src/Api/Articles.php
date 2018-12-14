@@ -13,6 +13,12 @@ use mixisLv\Reamaze\Params\Articles\GetParams;
 use mixisLv\Reamaze\Params\Articles\CreateParams;
 use mixisLv\Reamaze\Params\Articles\UpdateParams;
 
+/**
+ * Class Articles
+ * @package mixisLv\Reamaze\Api
+ *
+ * @author Mikus Rozenbergs <mikus.rozenbergs@gmail.com>
+ */
 class Articles extends BaseApi
 {
     /**
