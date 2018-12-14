@@ -34,12 +34,12 @@ abstract class BaseParams
     {
         if (!property_exists($this, $property)) {
             throw new ApiException(get_class($this) . ' does not accepts property: ' . $property);
+        }
+
+        if (method_exists($this, $functionName = 'sanitize' . ucfirst($property))) {
+            $this->$property = $this->$functionName($value);
         } else {
-            if (method_exists($this, $functionName = 'sanitize' . ucfirst($property))) {
-                $this->$property = $this->$functionName($value);
-            } else {
-                $this->$property = $value;
-            }
+            $this->$property = $value;
         }
     }
 

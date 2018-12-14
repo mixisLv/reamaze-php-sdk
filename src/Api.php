@@ -89,27 +89,27 @@ class Api
     {
         if (property_exists($this, $property)) {
             return $this->$property;
-        } else {
-            switch ($property) {
-                case 'articles':
-                    $this->$property = new Articles($this);
-                    break;
-                case 'contacts':
-                    $this->$property = new Contacts($this);
-                    break;
-                case 'conversations':
-                    $this->$property = new Conversations($this);
-                    break;
-                case 'messages':
-                    $this->$property = new Messages($this);
-                    break;
-                case 'channels':
-                    $this->$property = new Channels($this);
-                    break;
-            }
-
-            return isset($this->$property) ? $this->$property : null;
         }
+
+        switch ($property) {
+            case 'articles':
+                $this->$property = new Articles($this);
+                break;
+            case 'contacts':
+                $this->$property = new Contacts($this);
+                break;
+            case 'conversations':
+                $this->$property = new Conversations($this);
+                break;
+            case 'messages':
+                $this->$property = new Messages($this);
+                break;
+            case 'channels':
+                $this->$property = new Channels($this);
+                break;
+        }
+
+        return isset($this->$property) ? $this->$property : null;
     }
 
     /**
