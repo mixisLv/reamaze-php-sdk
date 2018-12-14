@@ -26,7 +26,7 @@ if (!defined('REAMAZE_TOKEN')) {
 }
 
 $reamaze        = new Api(REAMAZE_BRAND, REAMAZE_LOGIN, REAMAZE_TOKEN);
-$reamaze->debug = true;
+$reamaze->debug = false;
 
 echo "<h3>Example 1</h3>";
 echo "<pre>";
