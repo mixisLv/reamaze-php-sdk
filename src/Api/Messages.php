@@ -8,9 +8,15 @@
 namespace mixisLv\Reamaze\Api;
 
 use mixisLv\Reamaze\BaseApi;
-use mixisLv\Reamaze\Params\Messages\CreateParams as MessageCreateParams;
-use mixisLv\Reamaze\Params\Messages\RetrieveParams as MessageRetrieveParams;
+use mixisLv\Reamaze\Params\Messages\CreateParams as MessagesCreateParams;
+use mixisLv\Reamaze\Params\Messages\RetrieveParams as MessagesRetrieveParams;
 
+/**
+ * Class Messages
+ * @package mixisLv\Reamaze\Api
+ *
+ * @author Mikus Rozenbergs <mikus.rozenbergs@gmail.com>
+ */
 class Messages extends BaseApi
 {
     /**
@@ -40,11 +46,11 @@ class Messages extends BaseApi
     /**
      * prepareCreateParams
      *
-     * @param MessageCreateParams|null $params
+     * @param MessagesCreateParams|null $params
      *
      * @return array
      */
-    private function prepareCreateParams(MessageCreateParams $params = null)
+    private function prepareCreateParams(MessagesCreateParams $params = null)
     {
         return [
             'body'                  => $params->body,
@@ -57,35 +63,68 @@ class Messages extends BaseApi
         ];
     }
 
+
     /**
-     * retrieve
+     * prepareRetrieveParams
      *
-     * @param MessageRetrieveParams|null $params
+     * @param MessagesRetrieveParams|null $params
+     * @return array
+     */
+    private function prepareRetrieveParams(MessagesRetrieveParams $params = null)
+    {
+        return [
+            'filter' => $params->filter,
+            'page' => $params->page,
+            'visibility' => $params->visibility
+        ];
+    }
+
+    /**
+     * Retrieving Messages
+     *
+     * <code>
+     *      $params = new \mixisLv\Reamaze\Params\Messages\RetrieveParams\RetrieveParams(['slug'=> 'new-conversation']);
+     *      $response = $reamaze->messages->retrieve($params);
+     * </code>
+     *
+     * @param MessagesRetrieveParams|null $params
      *
      * @return \stdClass
      * @throws \mixisLv\Reamaze\Exceptions\ApiException
      * @see https://www.reamaze.com/api/get_messages
      */
-    public function retrieve(MessageRetrieveParams $params = null)
+    public function retrieve(MessagesRetrieveParams $params = null)
     {
         return $this->api->call(
             $this->getRetrieveAction($params->slug),
             'GET',
-            ['filter' => $params->filter, 'page' => $params->page, 'visibility' => $params->visibility]
+            $this->prepareRetrieveParams($params)
         );
     }
 
     /**
-     * create
+     * Creating Messages
      *
-     * @param                     $slug
-     * @param MessageCreateParams $params
+     * <code>
+     *      $message = new \mixisLv\Reamaze\Params\Messages\CreateParams\CreateParams([
+     *          "body"        => "Nullam rutrum cursus arcu, et viverra nisl finibus molestie.",
+     *          "recipients"  => ["recipient@example.com"],
+     *          "user"        => [
+     *              "name"  => "Lorem Ipsum",
+     *              "email" => "lorem.ipsum@example.com",
+     *          ],
+     *      ]);
+     *      $response = $reamaze->messages->create('new-conversation', $message);
+     * </code>
+     *
+     * @param string                $slug
+     * @param MessagesCreateParams $params
      *
      * @return \stdClass
      * @throws \mixisLv\Reamaze\Exceptions\ApiException
      * @see https://www.reamaze.com/api/post_messages
      */
-    public function create($slug, MessageCreateParams $params)
+    public function create($slug, MessagesCreateParams $params)
     {
         return $this->api->call(
             $this->getCreateAction($slug),
