@@ -23,12 +23,12 @@ class Conversations extends BaseApi
     private function prepareCreateParams(ConversationsCreateParams $params = null)
     {
         return [
-            'subject'   => $params->subject,
-            'category'   => $params->category,
-            'tag_list'   => $params->tagList,
-            'message'   => $params->message,
-            'user'   => $params->user,
-            'data '   => $params->data,
+            'subject'  => $params->subject,
+            'category' => $params->category,
+            'tag_list' => $params->tagList,
+            'message'  => $params->message,
+            'user'     => $params->user,
+            'data '    => $params->data,
         ];
     }
 
@@ -52,7 +52,14 @@ class Conversations extends BaseApi
     }
 
     /**
-     * retrieve
+     * Retrieving Conversations
+     *
+     * <code>
+     *      $params = new \mixisLv\Reamaze\Params\Conversations\RetrieveParams([
+     *          'filter'=> RetrieveParams::FILTER_ALL
+     *      ]);
+     * $response = $reamaze->conversations->retrieve($params);
+     * </code>
      *
      * @param ConversationsRetrieveParams|null $params
      *
@@ -70,9 +77,25 @@ class Conversations extends BaseApi
     }
 
     /**
-     * create
+     * Creating Conversations
      *
      * @param ConversationsCreateParams $params
+     * <code>
+     *      $conversation = new \mixisLv\Reamaze\Params\Conversations\CreateParams([
+     *          "subject"  => "new conversation",
+     *          "category" => "support",
+     *          "tagList"  => ["API", "test"],
+     *          "message"  => [
+     *              "body"        => "Nullam rutrum cursus arcu, et viverra nisl finibus molestie.",
+     *              "recipients"  => ["recipient@example.com"],
+     *          ],
+     *          "user"     => [
+     *              "name"  => "Lorem Ipsum",
+     *              "email" => "lorem.ipsum@example.com",
+     *          ]
+     *      ]);
+     *      $response     = $reamaze->conversations->create($conversation);
+     * </code>
      *
      * @return \stdClass
      * @throws \mixisLv\Reamaze\Exceptions\ApiException
