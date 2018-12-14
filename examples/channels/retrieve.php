@@ -3,8 +3,6 @@
  * reamaze-php-sdk
  *
  * @author    Mikus Rozenbergs <mikus.rozenbergs@gmail.com>
- * @copyright Copyright (C) 2016 Mikus Rozenbergs
- * @version   $Id$
  */
 
 use mixisLv\Reamaze\Api;
