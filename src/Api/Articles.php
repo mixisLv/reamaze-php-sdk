@@ -16,7 +16,7 @@ use mixisLv\Reamaze\Params\Articles\UpdateParams;
 class Articles extends BaseApi
 {
     /**
-     * retrieve
+     * Retrieving Articles
      *
      * <code>
      *     $params = new mixisLv\Reamaze\Params\Articles\RetrieveParams\RetrieveParams();
@@ -41,7 +41,7 @@ class Articles extends BaseApi
     }
 
     /**
-     * get
+     * Get Article
      *
      * <code>
      *     $params = new mixisLv\Reamaze\Params\Articles\RetrieveParams\GetParams();
@@ -65,7 +65,7 @@ class Articles extends BaseApi
     }
 
     /**
-     * create
+     * Creating Articles
      *
      * <code>
      *     $params = new mixisLv\Reamaze\Params\Articles\RetrieveParams\CreateParams();
@@ -95,7 +95,7 @@ class Articles extends BaseApi
     }
 
     /**
-     * update
+     * Updating Articles
      *
      * <code>
      *     $params = new mixisLv\Reamaze\Params\Articles\RetrieveParams\UpdateParams();
