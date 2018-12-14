@@ -19,7 +19,7 @@ class Articles extends BaseApi
      * retrieve
      *
      * <code>
-     *     $params = new RetrieveParams();
+     *     $params = new mixisLv\Reamaze\Params\Articles\RetrieveParams\RetrieveParams();
      *     $params->page = 1;
      *     $params->q    = 'example'
      *     $response     = $reamaze->articles->retrieve($params);
@@ -44,7 +44,7 @@ class Articles extends BaseApi
      * get
      *
      * <code>
-     *     $params = new GetParams();
+     *     $params = new mixisLv\Reamaze\Params\Articles\RetrieveParams\GetParams();
      *     $params->slug = 'test';
      *     $response     = $reamaze->articles->get($params);
      * </code>
@@ -68,7 +68,7 @@ class Articles extends BaseApi
      * create
      *
      * <code>
-     *     $params = new CreateParams();
+     *     $params = new mixisLv\Reamaze\Params\Articles\RetrieveParams\CreateParams();
      *     $params->slug = 'test';
      *     $response     = $reamaze->articles->create($params);
      * </code>
@@ -98,7 +98,7 @@ class Articles extends BaseApi
      * update
      *
      * <code>
-     *     $params = new UpdateParams();
+     *     $params = new mixisLv\Reamaze\Params\Articles\RetrieveParams\UpdateParams();
      *     $params->slug  = 'test';
      *     $params->title = 'new title';
      *     $params->body  = 'new body';
