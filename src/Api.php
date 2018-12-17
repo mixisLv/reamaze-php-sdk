@@ -242,7 +242,8 @@ class Api
             ', ',
             array_map(
                 function ($value, $key) {
-                    return $key . ': ' . implode(',', $value);
+                    print_r([$value, $key]);
+                    return $key . ': ' . is_string($value) ? $value : implode(',', $value);
                 },
                 (array)$errors,
                 array_keys((array)$errors)

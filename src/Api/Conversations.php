@@ -9,6 +9,7 @@ namespace mixisLv\Reamaze\Api;
 
 use mixisLv\Reamaze\BaseApi;
 use mixisLv\Reamaze\Params\Conversations\CreateParams as ConversationsCreateParams;
+use mixisLv\Reamaze\Params\Conversations\GetParams as ConversationGetParams;
 use mixisLv\Reamaze\Params\Conversations\RetrieveParams as ConversationsRetrieveParams;
 
 /**
@@ -19,6 +20,17 @@ use mixisLv\Reamaze\Params\Conversations\RetrieveParams as ConversationsRetrieve
  */
 class Conversations extends BaseApi
 {
+    /**
+     * getAction
+     *
+     * @param string $slug
+     * @return string
+     */
+    private function getAction($slug = null)
+    {
+        return 'conversations' . ($slug ? '/' . $slug : '');
+    }
+
     /**
      * prepareCreateParams
      *
@@ -75,10 +87,36 @@ class Conversations extends BaseApi
      */
     public function retrieve(ConversationsRetrieveParams $params = null)
     {
+        $action  = $this->getAction();
+
         return $this->api->call(
-            'conversations',
+            $action,
             'GET',
             $this->prepareRetrieveParams($params)
+        );
+    }
+
+    /**
+     * Get Conversation
+     *
+     * <code>
+     *      $params = new \mixisLv\Reamaze\Params\Conversations\GetParams(['slug'   => 'support']);
+     *      $response = $reamaze->channels->conversations($params);
+     * </code>
+     *
+     * @param ConversationGetParams $params
+     *
+     * @return \stdClass
+     * @throws \mixisLv\Reamaze\Exceptions\ApiException
+     * @see https://www.reamaze.com/api/get_conversation
+     */
+    public function get(ConversationGetParams $params)
+    {
+        $action  = $this->getAction($params->slug);
+        return $this->api->call(
+            $action,
+            'GET',
+            []
         );
     }
 

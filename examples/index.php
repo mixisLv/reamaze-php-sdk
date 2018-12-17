@@ -52,7 +52,7 @@
 
 <h2>Conversations</h2>
 
-<?php foreach (['create' => 'Create Conversation', 'retrieve' => 'Retrieve Conversation'] as $key => $title) { ?>
+<?php foreach (['create' => 'Create Conversation', 'get' =>'Get Conversation', 'retrieve' => 'Retrieve Conversation'] as $key => $title) { ?>
     <h3>
         <?= $title ?>
         <a href="#" onclick="toggleVisibility('conversations-<?= $key ?>');">source</a> |
