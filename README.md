@@ -19,7 +19,7 @@ The following PHP extension is required:
 
 ## Installation
 
-Run the following to include this via Composer
+Run the following to include this via [Composer](https://packagist.org/packages/mixislv/reamaze-php-sdk)
 
     composer require "mixislv/reamaze-php-sdk" "2.0.*"
 
