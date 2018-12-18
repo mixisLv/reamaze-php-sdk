@@ -39,6 +39,8 @@ class Articles extends BaseApi
      */
     public function retrieve(RetrieveParams $params = null)
     {
+        $params = $params ?: new RetrieveParams();
+
         return $this->api->call(
             ($params->slug ? 'topics/' . $params->slug . '/articles' : 'articles'),
             'GET',
@@ -55,13 +57,13 @@ class Articles extends BaseApi
      *     $response     = $reamaze->articles->get($params);
      * </code>
      *
-     * @param GetParams|null $params
+     * @param GetParams $params
      *
      * @return \stdClass
      * @throws \mixisLv\Reamaze\Exceptions\ApiException
      * @see https://www.reamaze.com/api/get_article
      */
-    public function get(GetParams $params = null)
+    public function get(GetParams $params)
     {
         return $this->api->call(
             'articles/' . $params->slug,
@@ -79,13 +81,13 @@ class Articles extends BaseApi
      *     $response     = $reamaze->articles->create($params);
      * </code>
      *
-     * @param CreateParams|null $params
+     * @param CreateParams $params
      *
      * @return \stdClass
      * @throws \mixisLv\Reamaze\Exceptions\ApiException
      * @see https://www.reamaze.com/api/post_article
      */
-    public function create(CreateParams $params = null)
+    public function create(CreateParams $params)
     {
         return $this->api->call(
             ($params->slug ? 'topics/' . $params->slug . "/articles" : 'articles'),
@@ -117,7 +119,7 @@ class Articles extends BaseApi
      * @throws \mixisLv\Reamaze\Exceptions\ApiException
      * @see https://www.reamaze.com/api/put_article
      */
-    public function update(UpdateParams $params = null)
+    public function update(UpdateParams $params)
     {
         return $this->api->call(
             'articles/' . $params->slug,

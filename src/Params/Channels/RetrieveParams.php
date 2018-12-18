@@ -37,7 +37,10 @@ class RetrieveParams extends BaseParams
      */
     public $channel = '';
 
-
+    /**
+     * @var int
+     */
+    public $page = 1;
 
     public static function channelFilters()
     {

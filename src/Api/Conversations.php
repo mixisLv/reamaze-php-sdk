@@ -34,11 +34,11 @@ class Conversations extends BaseApi
     /**
      * prepareCreateParams
      *
-     * @param ConversationsCreateParams|null $params
+     * @param ConversationsCreateParams $params
      *
      * @return array
      */
-    private function prepareCreateParams(ConversationsCreateParams $params = null)
+    private function prepareCreateParams(ConversationsCreateParams $params)
     {
         return [
             'subject'  => $params->subject,
@@ -53,11 +53,11 @@ class Conversations extends BaseApi
     /**
      * prepareRetrieveParams
      *
-     * @param ConversationsRetrieveParams|null $params
+     * @param ConversationsRetrieveParams $params
      *
      * @return array
      */
-    private function prepareRetrieveParams(ConversationsRetrieveParams $params = null)
+    private function prepareRetrieveParams(ConversationsRetrieveParams $params)
     {
         return [
             'page'   => $params->page,
@@ -87,7 +87,8 @@ class Conversations extends BaseApi
      */
     public function retrieve(ConversationsRetrieveParams $params = null)
     {
-        $action  = $this->getAction();
+        $params = $params ?: new ConversationsRetrieveParams();
+        $action = $this->getAction();
 
         return $this->api->call(
             $action,

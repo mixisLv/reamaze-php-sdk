@@ -46,11 +46,11 @@ class Messages extends BaseApi
     /**
      * prepareCreateParams
      *
-     * @param MessagesCreateParams|null $params
+     * @param MessagesCreateParams $params
      *
      * @return array
      */
-    private function prepareCreateParams(MessagesCreateParams $params = null)
+    private function prepareCreateParams(MessagesCreateParams $params)
     {
         return [
             'body'                  => $params->body,
@@ -70,7 +70,7 @@ class Messages extends BaseApi
      * @param MessagesRetrieveParams|null $params
      * @return array
      */
-    private function prepareRetrieveParams(MessagesRetrieveParams $params = null)
+    private function prepareRetrieveParams(MessagesRetrieveParams $params)
     {
         return [
             'filter' => $params->filter,
@@ -95,6 +95,8 @@ class Messages extends BaseApi
      */
     public function retrieve(MessagesRetrieveParams $params = null)
     {
+        $params = $params ?: new MessagesRetrieveParams();
+
         return $this->api->call(
             $this->getRetrieveAction($params->slug),
             'GET',
