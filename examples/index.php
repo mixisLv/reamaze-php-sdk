@@ -43,12 +43,12 @@
 <h2>Contacts</h2>
 
 <?php foreach ([
-        'retrieve'         => 'Retrieving Contacts',
-        'create'           => 'Create Contacts',
-        'update'           => 'Update Contacts',
-        'getIdentities'    => 'Get Contact Identities',
-        'createIdentities' => 'Create Identities',
-    ] as $key => $title) { ?>
+                   'retrieve'         => 'Retrieving Contacts',
+                   'create'           => 'Create Contacts',
+                   'update'           => 'Update Contacts',
+                   'getIdentities'    => 'Get Contact Identities',
+                   'createIdentities' => 'Create Identities',
+               ] as $key => $title) { ?>
     <h3>
         <?= $title ?>
         <a href="#" onclick="toggleVisibility('contacts-<?= $key ?>');">source</a> |
@@ -123,12 +123,25 @@
     </h3>
 
     <div id="staff-<?= $key ?>" style="display: none;">
-        <?php $file = file_get_contents('./channels/' . $key . '.php');
+        <?php $file = file_get_contents('./staff/' . $key . '.php');
         highlight_string($file); ?>
     </div>
 <?php } ?>
 
+<h2>Reports</h2>
 
+<?php foreach (['get' => 'Reports'] as $key => $title) { ?>
+    <h3>
+        <?= $title ?>
+        <a href="#" onclick="toggleVisibility('reports-<?= $key ?>');">source</a> |
+        <a href="./reports/<?= $key ?>.php" target="_blank">demo</a>
+    </h3>
+
+    <div id="staff-<?= $key ?>" style="display: none;">
+        <?php $file = file_get_contents('./reports/' . $key . '.php');
+        highlight_string($file); ?>
+    </div>
+<?php } ?>
 
 </body>
 </html>

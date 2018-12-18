@@ -27,6 +27,7 @@ use mixisLv\Reamaze\Exceptions\ApiException;
  * @property Messages $messages
  * @property Channels $channels
  * @property Staff $staff
+ * @property Reports $reports
  *
  * @author Mikus Rozenbergs <mikus.rozenbergs@gmail.com>
  */
@@ -82,11 +83,46 @@ class Api
     }
 
     /**
+     * getProperty
+     *
+     * @param $property
+     * @return Articles|Channels|Contacts|Conversations|Messages|Reports|Staff|null
+     */
+    private function getProperty($property)
+    {
+        switch ($property) {
+            case 'articles':
+                return new Articles($this);
+                break;
+            case 'contacts':
+                return new Contacts($this);
+                break;
+            case 'conversations':
+                return new Conversations($this);
+                break;
+            case 'messages':
+                return new Messages($this);
+                break;
+            case 'channels':
+                return new Channels($this);
+                break;
+            case 'reports':
+                return new Reports($this);
+                break;
+            case 'staff':
+                return new Staff($this);
+                break;
+        }
+
+        return null;
+    }
+
+    /**
      * __get
      *
      * @param $property
      *
-     * @return mixed
+     * @return Articles|Channels|Contacts|Conversations|Messages|Reports|Staff|null
      */
     public function __get($property)
     {
@@ -94,26 +130,7 @@ class Api
             return $this->$property;
         }
 
-        switch ($property) {
-            case 'articles':
-                $this->$property = new Articles($this);
-                break;
-            case 'contacts':
-                $this->$property = new Contacts($this);
-                break;
-            case 'conversations':
-                $this->$property = new Conversations($this);
-                break;
-            case 'messages':
-                $this->$property = new Messages($this);
-                break;
-            case 'channels':
-                $this->$property = new Channels($this);
-                break;
-            case 'staff':
-                $this->$property = new Staff($this);
-                break;
-        }
+        $this->$property = $this->getProperty($property);
 
         return isset($this->$property) ? $this->$property : null;
     }
