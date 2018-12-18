@@ -12,6 +12,8 @@ use mixisLv\Reamaze\Api\Channels;
 use mixisLv\Reamaze\Api\Contacts;
 use mixisLv\Reamaze\Api\Conversations;
 use mixisLv\Reamaze\Api\Messages;
+use mixisLv\Reamaze\Api\Reports;
+use mixisLv\Reamaze\Api\Staff;
 use mixisLv\Reamaze\Exceptions\ApiException;
 
 /**
@@ -24,6 +26,7 @@ use mixisLv\Reamaze\Exceptions\ApiException;
  * @property Conversations $conversations
  * @property Messages $messages
  * @property Channels $channels
+ * @property Staff $staff
  *
  * @author Mikus Rozenbergs <mikus.rozenbergs@gmail.com>
  */
@@ -106,6 +109,9 @@ class Api
                 break;
             case 'channels':
                 $this->$property = new Channels($this);
+                break;
+            case 'staff':
+                $this->$property = new Staff($this);
                 break;
         }
 
@@ -242,8 +248,8 @@ class Api
             ', ',
             array_map(
                 function ($value, $key) {
-                    print_r([$value, $key]);
-                    return $key . ': ' . is_string($value) ? $value : implode(',', $value);
+                    return $key . ': ' . implode(',', $value);
+                    //return $key . ': ' . is_string($value) ? $value : implode(',', $value);
                 },
                 (array)$errors,
                 array_keys((array)$errors)

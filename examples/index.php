@@ -113,6 +113,22 @@
     </div>
 <?php } ?>
 
+<h2>Staff</h2>
+
+<?php foreach (['retrieve' => 'Retrieving Staff', 'create' => 'Create Staff User'] as $key => $title) { ?>
+    <h3>
+        <?= $title ?>
+        <a href="#" onclick="toggleVisibility('channels-<?= $key ?>');">source</a> |
+        <a href="./staff/<?= $key ?>.php" target="_blank">demo</a>
+    </h3>
+
+    <div id="staff-<?= $key ?>" style="display: none;">
+        <?php $file = file_get_contents('./channels/' . $key . '.php');
+        highlight_string($file); ?>
+    </div>
+<?php } ?>
+
+
 
 </body>
 </html>
