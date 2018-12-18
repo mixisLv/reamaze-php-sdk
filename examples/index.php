@@ -42,12 +42,12 @@
 
 <h2>Contacts</h2>
 
-<?php foreach (
-    [
-        'retrieve'      => 'Retrieving Contacts',
-        'create'        => 'Create Contacts',
-        'update'        => 'Update Contacts',
-        'getIdentities' => 'Get Contact Identities',
+<?php foreach ([
+        'retrieve'         => 'Retrieving Contacts',
+        'create'           => 'Create Contacts',
+        'update'           => 'Update Contacts',
+        'getIdentities'    => 'Get Contact Identities',
+        'createIdentities' => 'Create Identities',
     ] as $key => $title) { ?>
     <h3>
         <?= $title ?>

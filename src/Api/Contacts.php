@@ -8,6 +8,7 @@
 namespace mixisLv\Reamaze\Api;
 
 use mixisLv\Reamaze\BaseApi;
+use mixisLv\Reamaze\Params\Contacts\CreateIdentitiesParams;
 use mixisLv\Reamaze\Params\Contacts\RetrieveParams;
 use mixisLv\Reamaze\Params\Contacts\CreateParams;
 use mixisLv\Reamaze\Params\Contacts\UpdateParams;
@@ -92,10 +93,38 @@ class Contacts extends BaseApi
      *
      * @return \stdClass
      * @throws \mixisLv\Reamaze\Exceptions\ApiException
-     * @see https://www.reamaze.com/api/put_contacts
+     * @see https://www.reamaze.com/api/get_identities
      */
     public function getIdentities($email)
     {
         return $this->api->call('contacts/' . $email . '/identities', 'GET', []);
+    }
+
+    /**
+     * Create Identities
+     *
+     * <code>
+     *      $identity = new \mixisLv\Reamaze\Params\Contacts\CreateIdentitiesParams([
+     *          'type'       => \mixisLv\Reamaze\Params\Contacts\CreateIdentitiesParams::TYPE_MOBILE,
+     *          'identifier' => '+99999999999',
+     *      ]);
+     *
+     *      $response = $reamaze->contacts->createIdentities('recipient@example.com', $identity);
+     * </code>
+     *
+     * @param  string $email
+     * @param CreateIdentitiesParams $params
+     *
+     * @return \stdClass
+     * @throws \mixisLv\Reamaze\Exceptions\ApiException
+     * @see https://www.reamaze.com/api/post_identities
+     */
+    public function createIdentities($email, CreateIdentitiesParams $params)
+    {
+        return $this->api->call(
+            'contacts/' . $email . '/identities',
+            'POST',
+            ['identity' => $params->toArray()]
+        );
     }
 }
