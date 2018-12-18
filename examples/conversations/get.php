@@ -42,5 +42,5 @@ try {
     $response = $reamaze->conversations->get($params);
     var_dump($response);
 } catch (ApiException $e) {
-    var_dump($e);
+    var_dump($e->getMessage());
 }

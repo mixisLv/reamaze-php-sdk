@@ -59,5 +59,5 @@ try {
     $response     = $reamaze->conversations->create($conversation);
     var_dump($response);
 } catch (ApiException $e) {
-    var_dump($e);
+    var_dump($e->getMessage());
 }
