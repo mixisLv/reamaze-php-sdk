@@ -11,7 +11,9 @@
     </rule>
     <rule ref="rulesets/codesize.xml"/>
     <rule ref="rulesets/controversial.xml"/>
-    <rule ref="rulesets/design.xml"/>
+    <rule ref="rulesets/design.xml">
+        <exclude name="NumberOfChildren"/>
+    </rule>
     <rule ref="rulesets/naming.xml">
         <exclude name="ShortVariable"/>
     </rule>
@@ -24,8 +26,20 @@
           externalInfoUrl="http://phpmd.org/rules/naming.html#shortvariable">
         <priority>3</priority>
         <properties>
-            <property name="minimum" description="Minimum length for a variable, property or parameter name" value="3"/>
+            <property name="minimum" value="3" description="Minimum length for a variable, property or parameter name"/>
             <property name="exceptions" value="id,i,q,j,v,e,f" />
         </properties>
+    </rule>
+
+    <rule name="rulesets/design.xml/NumberOfChildren"
+          since="0.2"
+          message = "The {0} {1} has {2} children. Consider to rebalance this class hierarchy to keep number of children under {3}."
+          class="PHPMD\Rule\Design\NumberOfChildren"
+          externalInfoUrl="https://phpmd.org/rules/design.html#numberofchildren">
+        <priority>2</priority>
+        <properties>
+            <property name="minimum" value="30" description="Maximum number of acceptable child classes." />
+        </properties>
+        <example />
     </rule>
 </ruleset>
