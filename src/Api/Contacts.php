@@ -80,4 +80,22 @@ class Contacts extends BaseApi
     {
         return $this->api->call('contacts/' . $email, 'PUT', ['contact' => $params->toArray()]);
     }
+
+    /**
+     * Get Contact Identities
+     *
+     * <code>
+     *      $response = $reamaze->contacts->getIdentities('recipient@example.com');
+     * </code>
+     *
+     * @param  string      $email
+     *
+     * @return \stdClass
+     * @throws \mixisLv\Reamaze\Exceptions\ApiException
+     * @see https://www.reamaze.com/api/put_contacts
+     */
+    public function getIdentities($email)
+    {
+        return $this->api->call('contacts/' . $email . '/identities', 'GET', []);
+    }
 }

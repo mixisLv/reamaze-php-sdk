@@ -12,6 +12,7 @@
             else
                 e.style.display = 'block';
         }
+
         //-->
     </script>
 </head>
@@ -21,7 +22,12 @@
 
 <h2>Articles [ @todo ]</h2>
 
-<?php foreach (['retrieve' => 'Retrieving Articles', 'get' => 'Get Article', 'create' => 'Creating Articles', 'update' => 'Updating Articles'] as $key => $title) { ?>
+<?php foreach ([
+                   'retrieve' => 'Retrieving Articles',
+                   'get'      => 'Get Article',
+                   'create'   => 'Creating Articles',
+                   'update'   => 'Updating Articles',
+               ] as $key => $title) { ?>
     <h3>
         <?= $title ?>
         <a href="#" onclick="toggleVisibility('articles-<?= $key ?>');">source</a> |
@@ -36,7 +42,13 @@
 
 <h2>Contacts</h2>
 
-<?php foreach (['retrieve' => 'Retrieving Contacts', 'create' => 'Create Contacts', 'update' => 'Update Contacts'] as $key => $title) { ?>
+<?php foreach (
+    [
+        'retrieve'      => 'Retrieving Contacts',
+        'create'        => 'Create Contacts',
+        'update'        => 'Update Contacts',
+        'getIdentities' => 'Get Contact Identities',
+    ] as $key => $title) { ?>
     <h3>
         <?= $title ?>
         <a href="#" onclick="toggleVisibility('contacts-<?= $key ?>');">source</a> |
@@ -52,7 +64,11 @@
 
 <h2>Conversations</h2>
 
-<?php foreach (['create' => 'Create Conversation', 'get' =>'Get Conversation', 'retrieve' => 'Retrieve Conversation'] as $key => $title) { ?>
+<?php foreach ([
+                   'create'   => 'Create Conversation',
+                   'get'      => 'Get Conversation',
+                   'retrieve' => 'Retrieve Conversation',
+               ] as $key => $title) { ?>
     <h3>
         <?= $title ?>
         <a href="#" onclick="toggleVisibility('conversations-<?= $key ?>');">source</a> |
