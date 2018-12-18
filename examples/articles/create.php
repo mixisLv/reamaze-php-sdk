@@ -41,10 +41,10 @@ echo "<h3>Example 2</h3>";
 echo "<pre>";
 
 try {
-    $params = new CreateParams(['slug' => 'test']);
+    $params = new CreateParams(['slug' => 'article-topic']);
 
     $params->title = 'Article title';
-    $params->body  = 'Article with slug';
+    $params->body  = 'Article with topic';
 
     $response = $reamaze->articles->create($params);
     var_dump($response);

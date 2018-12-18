@@ -23,7 +23,7 @@ $reamaze->debug = false;
 echo "<h3>Example 1</h3>";
 echo "<pre>";
 try {
-    $response = $reamaze->articles->get(new GetParams(['slug' => 'test']));
+    $response = $reamaze->articles->get(new GetParams(['slug' => 'article-title']));
     var_dump($response);
 } catch (ApiException $e) {
     var_dump($e->getMessage());
