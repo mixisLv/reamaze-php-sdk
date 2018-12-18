@@ -16,4 +16,3 @@ abstract class BaseApi
         $this->api = $api;
     }
 }
-

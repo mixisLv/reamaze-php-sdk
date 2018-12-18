@@ -18,6 +18,13 @@ use mixisLv\Reamaze\Params\BaseParams;
 class CreateParams extends BaseParams
 {
     /**
+     * Uniquely identifies a contact and should correspond to the id
+     * internal to your application or authentication system.
+     * @var string
+     */
+    protected $id = '';
+
+    /**
      * @var string contact name
      */
     protected $name = '';
@@ -28,9 +35,19 @@ class CreateParams extends BaseParams
     protected $email = '';
 
     /**
+     * @var string contact phone number.
+     */
+    protected $mobile = '';
+
+    /**
      * @var array custom attributes
      */
     protected $data = [];
+
+    public function sanitizeId($value)
+    {
+        return (string)$value;
+    }
 
     public function sanitizeName($value)
     {
@@ -38,6 +55,11 @@ class CreateParams extends BaseParams
     }
 
     public function sanitizeEmail($value)
+    {
+        return (string)$value;
+    }
+
+    public function sanitizeMobile($value)
     {
         return (string)$value;
     }

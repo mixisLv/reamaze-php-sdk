@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
     <title>Reamaze PHP SDK Examples</title>
@@ -12,6 +12,7 @@
             else
                 e.style.display = 'block';
         }
+
         //-->
     </script>
 </head>
@@ -19,9 +20,35 @@
 
 <h1>Reamaze php SDK Examples</h1>
 
+<h2>Articles [ @todo ]</h2>
+
+<?php foreach ([
+                   'retrieve' => 'Retrieving Articles',
+                   'get'      => 'Get Article',
+                   'create'   => 'Creating Articles',
+                   'update'   => 'Updating Articles',
+               ] as $key => $title) { ?>
+    <h3>
+        <?= $title ?>
+        <a href="#" onclick="toggleVisibility('articles-<?= $key ?>');">source</a> |
+        <a href="./articles/<?= $key ?>.php" target="_blank">demo</a>
+    </h3>
+
+    <div id="articles-<?= $key ?>" style="display: none;">
+        <?php $file = file_get_contents('./articles/' . $key . '.php');
+        highlight_string($file); ?>
+    </div>
+<?php } ?>
+
 <h2>Contacts</h2>
 
-<?php foreach (['retrieve' => 'Retrieving Contacts', 'create' => 'Create Contacts', 'update' => 'Update Contacts'] as $key => $title) { ?>
+<?php foreach ([
+                   'retrieve'         => 'Retrieving Contacts',
+                   'create'           => 'Create Contacts',
+                   'update'           => 'Update Contacts',
+                   'getIdentities'    => 'Get Contact Identities',
+                   'createIdentities' => 'Create Identities',
+               ] as $key => $title) { ?>
     <h3>
         <?= $title ?>
         <a href="#" onclick="toggleVisibility('contacts-<?= $key ?>');">source</a> |
@@ -37,7 +64,11 @@
 
 <h2>Conversations</h2>
 
-<?php foreach (['create' => 'Create Conversation', 'retrieve' => 'Retrieve Conversation'] as $key => $title) { ?>
+<?php foreach ([
+                   'create'   => 'Create Conversation',
+                   'get'      => 'Get Conversation',
+                   'retrieve' => 'Retrieve Conversation',
+               ] as $key => $title) { ?>
     <h3>
         <?= $title ?>
         <a href="#" onclick="toggleVisibility('conversations-<?= $key ?>');">source</a> |
@@ -66,6 +97,51 @@
     </div>
 <?php } ?>
 
+
+<h2>Channels</h2>
+
+<?php foreach (['retrieve' => 'Retrieving Channels', 'get' => 'Get Channel'] as $key => $title) { ?>
+    <h3>
+        <?= $title ?>
+        <a href="#" onclick="toggleVisibility('channels-<?= $key ?>');">source</a> |
+        <a href="./channels/<?= $key ?>.php" target="_blank">demo</a>
+    </h3>
+
+    <div id="channels-<?= $key ?>" style="display: none;">
+        <?php $file = file_get_contents('./channels/' . $key . '.php');
+        highlight_string($file); ?>
+    </div>
+<?php } ?>
+
+<h2>Staff</h2>
+
+<?php foreach (['retrieve' => 'Retrieving Staff', 'create' => 'Create Staff User'] as $key => $title) { ?>
+    <h3>
+        <?= $title ?>
+        <a href="#" onclick="toggleVisibility('channels-<?= $key ?>');">source</a> |
+        <a href="./staff/<?= $key ?>.php" target="_blank">demo</a>
+    </h3>
+
+    <div id="staff-<?= $key ?>" style="display: none;">
+        <?php $file = file_get_contents('./staff/' . $key . '.php');
+        highlight_string($file); ?>
+    </div>
+<?php } ?>
+
+<h2>Reports</h2>
+
+<?php foreach (['get' => 'Reports'] as $key => $title) { ?>
+    <h3>
+        <?= $title ?>
+        <a href="#" onclick="toggleVisibility('reports-<?= $key ?>');">source</a> |
+        <a href="./reports/<?= $key ?>.php" target="_blank">demo</a>
+    </h3>
+
+    <div id="staff-<?= $key ?>" style="display: none;">
+        <?php $file = file_get_contents('./reports/' . $key . '.php');
+        highlight_string($file); ?>
+    </div>
+<?php } ?>
 
 </body>
 </html>

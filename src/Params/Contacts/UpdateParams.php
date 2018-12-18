@@ -36,5 +36,4 @@ class UpdateParams extends BaseParams
     {
         return (array)$value;
     }
-
 }

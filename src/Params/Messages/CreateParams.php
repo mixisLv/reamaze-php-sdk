@@ -20,7 +20,7 @@ class CreateParams extends BaseParams
     /**
      * @var string message body
      */
-    protected $body  = '';
+    public $body  = '';
 
     /**
      * Pass in additional participants in the conversation. These participants will be automatically
@@ -28,7 +28,7 @@ class CreateParams extends BaseParams
      *
      * @var array (optional) list of additional participants in the conversation
      */
-    protected $recipients = [];
+    public $recipients = [];
 
     /**
      * array['user']
@@ -37,24 +37,30 @@ class CreateParams extends BaseParams
      *
      * @var array conversation author (See above)
      */
-    protected $user = [];
+    public $user = [];
 
     /**
      * The visibility value can be the following values: 0 (Regular) or 1 (Internal Note).
      *
      * @var int message visibility
      */
-    protected $visibility = 0;
-
+    public $visibility = 0;
 
     /**
-     * @var bool (optional) true to prevent Reamaze from sending any email (or integration) notifications related to this message
+     * @var bool (optional) true to prevent Reamaze from sending any email (or integration)
+     * notifications related to this message
      */
-    protected $suppress_notification = false;
-    
-    /**
-     * @var bool (optional) true to prevent Reamaze from marking the conversation as resolved when message[user] is a staff user.
-     **/
-    protected $suppress_autoresolve  = false;
+    public $suppressNotification = false;
 
+    /**
+     * @var bool (optional) true to prevent Reamaze from marking the conversation as resolved
+     * when message[user] is a staff user.
+     **/
+    public $suppressAutoresolve  = false;
+
+    /**
+     * @var string (optional) You can optionally pass in an attachment string attribute with a URL
+     * to attach a file to the message. The URL should specify a valid location where Reamaze can fetch the file.
+     */
+    public $attachment = null;
 }

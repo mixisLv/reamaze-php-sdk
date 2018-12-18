@@ -17,31 +17,31 @@ use mixisLv\Reamaze\Params\BaseParams;
  */
 class RetrieveParams extends BaseParams
 {
-
     const FILTER_STAFF    = 'staff';
     const FILTER_CUSTOMER = 'customer';
 
     /**
      * @var int
      */
-    protected $page = 1;
+    public $page = 1;
 
     /**
      * @var string
      */
-    protected $slug = '';
+    public $slug = '';
 
     /**
-     * The visibility value can be the following values: 0 (Regular) or 1 (Internal Note) or 2 (Collision Detected Message).
+     * The visibility value can be the following values: 0 (Regular) or 1 (Internal Note)
+     * or 2 (Collision Detected Message).
      *
      * @var int message visibility
      */
-    protected $visibility = 0;
+    public $visibility = 0;
 
     /**
      * @var string
      */
-    protected $filter = '';
+    public $filter = '';
 
     public static function filters()
     {
@@ -60,5 +60,4 @@ class RetrieveParams extends BaseParams
     {
         return in_array($value, self::filters()) ? $value : '';
     }
-
 }

@@ -3,8 +3,6 @@
  * reamaze-php-sdk
  *
  * @author    Mikus Rozenbergs <mikus.rozenbergs@gmail.com>
- * @copyright Copyright (C) 2016 Mikus Rozenbergs
- * @version   $Id$
  */
 
 use mixisLv\Reamaze\Api;
@@ -33,30 +31,33 @@ $reamaze->debug = false;
 
 // Create conversation
 try {
+    $text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+             Nullam rutrum cursus arcu, et viverra nisl finibus molestie.";
+
     $conversation = new CreateParams(
         [
             "subject"  => "new conversation",
             "category" => "support",
-            "tag_list" => [
+            "tagList"  => [
                 "API",
-                "test"
+                "test",
             ],
             "message"  => [
-                "body"                  => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam rutrum cursus arcu, et viverra nisl finibus molestie.",
+                "body"                  => $text,
                 "recipients"            => ["recipient@example.com"],
-                "suppress_notification" => true
+                "suppress_notification" => true,
             ],
             "user"     => [
                 "name"  => "Lorem Ipsum",
-                "email" => "lorem.ipsum@example.com"
+                "email" => "lorem.ipsum@example.com",
             ],
             'data'     => [
-                'custom_attribute' => 'custom data'
-            ]
+                'custom_attribute' => 'custom data',
+            ],
         ]
     );
     $response     = $reamaze->conversations->create($conversation);
     var_dump($response);
 } catch (ApiException $e) {
-    var_dump($e);
+    var_dump($e->getMessage());
 }
