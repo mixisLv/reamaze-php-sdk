@@ -34,10 +34,7 @@
         }
     },
     "extra": {
-        "archive": {
-            "exclude": ["!vendor", "/docs", "/tests", "/.gitattributes", "/.gitignore", "/.coveralls.yml", "/.travis.yml", "/phpmd.xml", "/phpunit.xml"]
-        },
-        "component": "package",
+       "component": "package",
         "branch-alias": {
             "dev-master": "2.0-dev"
         }
