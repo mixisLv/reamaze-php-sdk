@@ -1,10 +1,9 @@
 # Reamaze PHP SDK
 
-[![Project Status: WIP - Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](http://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus.org/#wip)
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![GitHub license](https://img.shields.io/github/license/mixisLv/reamaze-php-sdk.svg)](https://github.com/mixisLv/reamaze-php-sdk/blob/master/LICENSE)
 [![GitHub release](https://img.shields.io/github/release/mixisLv/reamaze-php-sdk.svg)]()
-[![Build Status](https://travis-ci.org/mixisLv/reamaze-php-sdk.svg?branch=v2-dev)](https://travis-ci.org/mixisLv/reamaze-php-sdk)
-
+[![Build Status](https://travis-ci.org/mixisLv/reamaze-php-sdk.svg?branch=master)](https://travis-ci.org/mixisLv/reamaze-php-sdk)
 
 ## A PHP client library for accessing Reamaze API
 
@@ -32,11 +31,11 @@ Or by adding the following to your composer.json:
 ## Usage
 
 ```php
-use mixisLv\Reamaze\Api;
+use mixisLv\Reamaze\Api as ReamazeApi;
 use mixisLv\Reamaze\Exceptions\ApiException;
 use mixisLv\Reamaze\Params\Articles\GetParams;
 
-$reamaze = new Api(REAMAZE_BRAND, REAMAZE_LOGIN, REAMAZE_TOKEN);
+$reamaze = new ReamazeApi(REAMAZE_BRAND, REAMAZE_LOGIN, REAMAZE_TOKEN);
 
 try {
     $response = $reamaze->articles->get(new GetParams(['slug' => 'test']));
