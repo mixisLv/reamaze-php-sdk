@@ -20,12 +20,12 @@ The following PHP extension is required:
 
 Run the following to include this via [Composer](https://packagist.org/packages/mixislv/reamaze-php-sdk)
 
-    composer require "mixislv/reamaze-php-sdk" "2.0.*"
+    composer require "mixislv/reamaze-php-sdk" "^2.0"
 
 Or by adding the following to your composer.json:
 
     "require": {
-        "mixislv/reamaze-php-sdk": "2.0.*"
+        "mixislv/reamaze-php-sdk": "^2.0"
     }
 
 ## Usage
