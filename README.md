@@ -2,7 +2,7 @@
 
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![GitHub license](https://img.shields.io/github/license/mixisLv/reamaze-php-sdk.svg)](https://github.com/mixisLv/reamaze-php-sdk/blob/master/LICENSE)
-[![GitHub release](https://img.shields.io/github/release/mixisLv/reamaze-php-sdk.svg)]()
+[![GitHub release](https://img.shields.io/github/release/mixisLv/reamaze-php-sdk.svg)](https://github.com/mixisLv/reamaze-php-sdk/releases/latest)
 [![Build Status](https://travis-ci.org/mixisLv/reamaze-php-sdk.svg?branch=master)](https://travis-ci.org/mixisLv/reamaze-php-sdk)
 
 ## A PHP client library for accessing Reamaze API
