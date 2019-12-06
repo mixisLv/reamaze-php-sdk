@@ -37,7 +37,8 @@ abstract class BaseParams
             throw new ApiException(get_class($this) . ' does not accepts property: ' . $property);
         }
 
-        if (method_exists($this, $functionName = 'sanitize' . ucfirst($property))) {
+        $functionName = 'sanitize' . ucfirst($property);
+        if (method_exists($this, $functionName)) {
             $this->$property = $this->$functionName($value);
         } else {
             $this->$property = $value;
