@@ -1,4 +1,5 @@
 <?php
+
 /**
  * reamaze-sdk-api
  *
@@ -317,7 +318,8 @@ class Api
     private function isError($response, $httpCode)
     {
         $error = false;
-        if ($response === null
+        if (
+            $response === null
             ||
             isset($response->error)
             ||

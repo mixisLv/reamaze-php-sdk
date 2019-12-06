@@ -1,4 +1,5 @@
 <?php
+
 /**
  * reamaze-sdk-api
  *
@@ -20,22 +21,22 @@ class RetrieveParams extends BaseParams
     /**
      * Archived conversations
      */
-    const FILTER_ARCHIVED = 'archived';
+    public const FILTER_ARCHIVED = 'archived';
 
     /**
      * Unresolved conversations
      */
-    const FILTER_OPEN = 'open';
+    public const FILTER_OPEN = 'open';
 
     /**
      * Unassigned conversations
      */
-    const FILTER_UNASSIGNED = 'unassigned';
+    public const FILTER_UNASSIGNED = 'unassigned';
 
     /**
      * All conversations
      */
-    const FILTER_ALL = 'all';
+    public const FILTER_ALL = 'all';
 
     /**
      * @var int

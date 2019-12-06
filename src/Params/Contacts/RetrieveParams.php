@@ -1,4 +1,5 @@
 <?php
+
 /**
  * reamaze-sdk-api
  *
@@ -26,12 +27,12 @@ class RetrieveParams extends BaseParams
     /**
      * Contacts that have an email.
      */
-    const TYPE_EMAIL = 'email';
+    public const TYPE_EMAIL = 'email';
 
     /**
      * Contacts that have a phone number.
      */
-    const TYPE_MOBILE = 'mobile';
+    public const TYPE_MOBILE = 'mobile';
 
     /**
      * @var int

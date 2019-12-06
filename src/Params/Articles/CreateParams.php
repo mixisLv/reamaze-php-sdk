@@ -1,4 +1,5 @@
 <?php
+
 /**
  * reamaze-sdk-api
  *
@@ -26,17 +27,17 @@ class CreateParams extends BaseParams
     /**
      * Published article
      */
-    const STATUS_PUBLISHED = 0;
+    public const STATUS_PUBLISHED = 0;
 
     /**
      * Draft article
      */
-    const STATUS_DRAFT = 1;
+    public const STATUS_DRAFT = 1;
 
     /**
      * Internal article
      */
-    const STATUS_INTERNAL = 4;
+    public const STATUS_INTERNAL = 4;
 
     /**
      * @var string
