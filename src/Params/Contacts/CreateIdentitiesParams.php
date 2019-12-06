@@ -1,4 +1,5 @@
 <?php
+
 /**
  * reamaze-sdk-api
  *
@@ -23,22 +24,22 @@ class CreateIdentitiesParams extends BaseParams
     /**
      * Contacts that have an email.
      */
-    const TYPE_EMAIL = 'email';
+    public const TYPE_EMAIL = 'email';
 
     /**
      * Contacts that have a phone number.
      */
-    const TYPE_MOBILE = 'mobile';
+    public const TYPE_MOBILE = 'mobile';
 
     /**
      * Contacts that have a instagram account.
      */
-    const TYPE_INSTAGRAM = 'instagram';
+    public const TYPE_INSTAGRAM = 'instagram';
 
     /**
      * Contacts that have a twitter account.
      */
-    const TYPE_TWITTER = 'twitter';
+    public const TYPE_TWITTER = 'twitter';
 
     /**
      * The type value can be the following: 'email', 'mobile', 'instagram', 'twitter'.

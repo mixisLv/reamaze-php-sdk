@@ -1,4 +1,5 @@
 <?php
+
 /**
  * reamaze-sdk-api
  *
@@ -17,10 +18,10 @@ use mixisLv\Reamaze\Params\BaseParams;
  */
 class RetrieveParams extends BaseParams
 {
-    const CHANNEL_EMAIL    = 'email';
-    const CHANNEL_FACEBOOK = 'facebook';
-    const CHANNEL_TWITTER  = 'twitter';
-    const CHANNEL_CHAT     = 'chat';
+    public const CHANNEL_EMAIL    = 'email';
+    public const CHANNEL_FACEBOOK = 'facebook';
+    public const CHANNEL_TWITTER  = 'twitter';
+    public const CHANNEL_CHAT     = 'chat';
 
 
     /**

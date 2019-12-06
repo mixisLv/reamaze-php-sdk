@@ -1,4 +1,5 @@
 <?php
+
 /**
  * reamaze-sdk-api
  *
@@ -25,17 +26,17 @@ class RetrieveParams extends BaseParams
     /**
      * Published articles
      */
-    const STATUS_PUBLISHED = 'published';
+    public const STATUS_PUBLISHED = 'published';
 
     /**
      * Draft articles
      */
-    const STATUS_DRAFT = 'draft';
+    public const STATUS_DRAFT = 'draft';
 
     /**
      * Internal articles
      */
-    const STATUS_INTERNAL = 'internal';
+    public const STATUS_INTERNAL = 'internal';
 
     /**
      * @var int
