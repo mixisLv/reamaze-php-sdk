@@ -214,7 +214,7 @@ class Api
     protected function log($message)
     {
         if ($this->debug) {
-            echo '<pre>', $message, '</pre>';
+            echo '<pre>', htmlspecialchars($message, ENT_QUOTES, 'UTF-8'), '</pre>';
         }
     }
 
